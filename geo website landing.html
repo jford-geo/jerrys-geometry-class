@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jerry's Geometry Class</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+```<user-input>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 40%, #2a3f6e 100%);
+    min-height: 100vh;
+    color: #e8ecf1;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    position: relative;
+  }
+
+  .header::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #4a9eda, transparent);
+    margin: 20px auto 0;
+  }
+
+  .branding {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #4a9eda;
+    margin-bottom: 8px;
+  }
+
+  .main-title {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #ffffff 0%, #a8c8e8 50%, #4a9eda 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: #8aa8c7;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+
+  /* ===== WELCOME MESSAGE ===== */
+  .welcome-section {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .welcome-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(74, 158, 218, 0.2);
+    border-radius: 16px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+  }
+
+  .welcome-card h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+
+  .welcome-card p {
+    font-size: 15px;
+    font-weight: 300;
+    color: #b0c4de;
+    line-height: 1.7;
+  }
+
+  .welcome-card .emoji-row {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  /* ===== MODULE GRID ===== */
+  .modules-section {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+  }
+
+  .section-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #4a9eda;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .module-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(74, 158, 218, 0.15);
+    border-radius: 14px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .module-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--card-accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .module-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(74, 158, 218, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .module-card:hover::before {
+    opacity: 1;
+  }
+
+  .module-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+  }
+
+  .module-card:nth-child(1) {
+    --card-accent: #4a9eda;
+    --card-bg: rgba(74, 158, 218, 0.1);
+    --card-border: rgba(74, 158, 218, 0.2);
+  }
+  .module-card:nth-child(2) {
+    --card-accent: #50b8a8;
+    --card-bg: rgba(80, 184, 168, 0.1);
+    --card-border: rgba(80, 184, 168, 0.2);
+  }
+  .module-card:nth-child(3) {
+    --card-accent: #d4a44a;
+    --card-bg: rgba(212, 164, 74, 0.1);
+    --card-border: rgba(212, 164, 74, 0.2);
+  }
+  .module-card:nth-child(4) {
+    --card-accent: #c75a8a;
+    --card-bg: rgba(199, 90, 138, 0.1);
+    --card-border: rgba(199, 90, 138, 0.2);
+  }
+  .module-card:nth-child(5) {
+    --card-accent: #7b68d4;
+    --card-bg: rgba(123, 104, 212, 0.1);
+    --card-border: rgba(123, 104, 212, 0.2);
+  }
+
+  .module-number {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #5a7a9a;
+    margin-bottom: 6px;
+  }
+
+  .module-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+
+  .module-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: #8aa8c7;
+    line-height: 1.6;
+  }
+
+  .module-features {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .feature-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #8aa8c7;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* ===== HOW TO USE ===== */
+  .howto-section {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+  }
+
+  .howto-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(74, 158, 218, 0.15);
+    border-radius: 14px;
+    padding: 28px;
+  }
+
+  .howto-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .howto-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .howto-step {
+    text-align: center;
+    padding: 16px;
+  }
+
+  .step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(74, 158, 218, 0.15);
+    border: 1px solid rgba(74, 158, 218, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #4a9eda;
+    margin: 0 auto 10px;
+  }
+
+  .step-text {
+    font-size: 13px;
+    font-weight: 400;
+    color: #8aa8c7;
+    line-height: 1.5;
+  }
+
+  .step-text strong {
+    color: #c8ddf0;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 10px;
+  }
+
+  .footer-line {
+    width: 60px;
+    height: 2px;
+    background: rgba(74, 158, 218, 0.3);
+    margin: 0 auto 14px;
+  }
+
+  .footer-text {
+    font-size: 12px;
+    font-weight: 400;
+    color: #5a7a9a;
+    letter-spacing: 1px;
+  }
+
+  .footer-text .heart {
+    color: #c75a8a;
+  }
+
+  /* ===== FLOATING GEOMETRY SHAPES (decorative) ===== */
+  .bg-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bg-shape {
+    position: absolute;
+    border: 1px solid rgba(74, 158, 218, 0.08);
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .bg-shape:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    top: 10%;
+    left: 5%;
+    transform: rotate(45deg);
+    animation-delay: 0s;
+  }
+
+  .bg-shape:nth-child(2) {
+    width: 120px;
+    height: 120px;
+    top: 60%;
+    right: 8%;
+    border-radius: 50%;
+    animation-delay: -5s;
+  }
+
+  .bg-shape:nth-child(3) {
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 70px solid rgba(74, 158, 218, 0.05);
+    top: 30%;
+    right: 15%;
+    animation-delay: -10s;
+    border: none;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 70px solid rgba(74, 158, 218, 0.05);
+  }
+
+  .bg-shape:nth-child(4) {
+    width: 60px;
+    height: 60px;
+    bottom: 15%;
+    left: 10%;
+    transform: rotate(30deg);
+    animation-delay: -15s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+    25% { transform: translateY(-20px) rotate(5deg); opacity: 0.8; }
+    50% { transform: translateY(-10px) rotate(-3deg); opacity: 0.6; }
+    75% { transform: translateY(-25px) rotate(4deg); opacity: 0.7; }
+  }
+
+  .content-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    .main-title {
+      font-size: 28px;
+    }
+    .module-grid {
+      grid-template-columns: 1fr;
+    }
+    .howto-steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</user-input>
+</head>
+<body>
+
+<!-- Decorative Background Shapes -->
+<div class="bg-shapes">
+  <div class="bg-shape"></div>
+  <div class="bg-shape"></div>
+  <div class="bg-shape"></div>
+  <div class="bg-shape"></div>
+</div>
+
+<div class="content-wrapper">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="branding">📐 Jerry's Geometry Class</div>
+    <h1 class="main-title">Interactive Geometry<br>Explorations</h1>
+    <p class="subtitle">Discover. Drag. Understand.</p>
+  </header>
+
+  <!-- WELCOME MESSAGE -->
+  <section class="welcome-section">
+    <div class="welcome-card">
+      <div class="emoji-row">📐 🔺 📏</div>
+      <h2>Welcome, Geometry Explorers!</h2>
+      <p>
+        This interactive toolkit is designed to help you <strong>see</strong> and <strong>experience</strong> the geometry concepts we're learning in class. 
+        Each module below lets you drag, resize, and manipulate geometric figures to discover relationships on your own. 
+        Don't just memorize — <strong>explore, observe, and understand</strong> why these properties are always true.
+      </p>
+      <p style="margin-top: 12px;">
+        Every module has a <strong>📖 Guided Lesson</strong> button if you need a walkthrough, and a <strong>📸 Screenshot</strong> button to capture your work.
+        Jump into any module to get started!
+      </p>
+    </div>
+  </section>
+
+  <!-- MODULE GRID -->
+  <section class="modules-section">
+    <div class="section-label">📚 Exploration Modules</div>
+    <div class="module-grid">
+
+      <!-- Module 1 -->
+      <div class="module-card">
+        <div class="module-icon">🔺</div>
+        <div class="module-number">Module 1</div>
+        <div class="module-title">Similar Triangles</div>
+        <div class="module-desc">
+          Define a reference triangle, then drag and manipulate a second triangle to explore similarity. Watch corresponding angles, side ratios, and similarity postulates update in real time.
+        </div>
+        <div class="module-features">
+          <span class="feature-tag">Draggable</span>
+          <span class="feature-tag">AA / SAS / SSS</span>
+          <span class="feature-tag">Transformations</span>
+        </div>
+      </div>
+
+      <!-- Module 2 -->
+      <div class="module-card">
+        <div class="module-icon">⬡</div>
+        <div class="module-number">Module 2</div>
+        <div class="module-title">Midsegments</div>
+        <div class="module-desc">
+          Toggle midsegments on and off to discover the Midsegment Theorem. See how three midsegments divide a triangle into four congruent triangles, each similar to the original.
+        </div>
+        <div class="module-features">
+          <span class="feature-tag">Draggable</span>
+          <span class="feature-tag">1:2 Ratios</span>
+          <span class="feature-tag">4 Congruent △s</span>
+        </div>
+      </div>
+
+      <!-- Module 3 -->
+      <div class="module-card">
+        <div class="module-icon">📐</div>
+        <div class="module-number">Module 3</div>
+        <div class="module-title">Trig Ratios — SOHCAHTOA</div>
+        <div class="module-desc">
+          Explore right triangle trigonometry by dragging vertices and watching sine, cosine, and tangent update live. Lock an angle and resize to prove the ratios stay constant.
+        </div>
+        <div class="module-features">
+          <span class="feature-tag">Sin / Cos / Tan</span>
+          <span class="feature-tag">Angle Lock</span>
+          <span class="feature-tag">Practice Mode</span>
+        </div>
+      </div>
+
+      <!-- Module 4 -->
+      <div class="module-card">
+        <div class="module-icon">⭐</div>
+        <div class="module-number">Module 4</div>
+        <div class="module-title">Special Right Triangles</div>
+        <div class="module-desc">
+          Investigate 45-45-90 and 30-60-90 triangles with draggable figures, input practice, and radical/decimal toggling. Explore Pythagorean Triple families and verify triples.
+        </div>
+        <div class="module-features">
+          <span class="feature-tag">45-45-90</span>
+          <span class="feature-tag">30-60-90</span>
+          <span class="feature-tag">Pyth. Triples</span>
+        </div>
+      </div>
+
+      <!-- Module 5 -->
+      <div class="module-card">
+        <div class="module-icon">🔵</div>
+        <div class="module-number">Module 5</div>
+        <div class="module-title">Unit Circle Connection</div>
+        <div class="module-desc">
+          See how the trig ratios from right triangles connect to the unit circle. Drag a point around the circle and watch sin and cos come to life as coordinates.
+        </div>
+        <div class="module-features">
+          <span class="feature-tag">Interactive</span>
+          <span class="feature-tag">Sin & Cos</span>
+          <span class="feature-tag">Visual Link</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW TO USE -->
+  <section class="howto-section">
+    <div class="howto-card">
+      <h3>🛠️ How to Use These Tools</h3>
+      <div class="howto-steps">
+        <div class="howto-step">
+          <div class="step-number">1</div>
+          <div class="step-text">Navigate to a <strong>module page</strong> from your Google Classroom link or the site menu</div>
+        </div>
+        <div class="howto-step">
+          <div class="step-number">2</div>
+          <div class="step-text"><strong>Click and drag</strong> vertices and points to explore — watch the measurements update live</div>
+        </div>
+        <div class="howto-step">
+          <div class="step-number">3</div>
+          <div class="step-text">Click <strong>📖 Guided Lesson</strong> if you need a step-by-step walkthrough of the concept</div>
+        </div>
+        <div class="howto-step">
+          <div class="step-number">4</div>
+          <div class="step-text">Use <strong>📸 Screenshot</strong> to capture your work and submit it to your teacher</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-line"></div>
+    <div class="footer-text">
+      Jerry's Geometry Class &nbsp;•&nbsp; Interactive Explorations &nbsp;<span class="heart">♥</span>&nbsp; Built for Learning
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
