@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Similar Triangles Explorer — Jerry's Geometry Class</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 40%, #2a3f6e 100%);
+  min-height: 100vh;
+  color: #e8ecf1;
+}
+.header {
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(74,158,218,0.2);
+  background: rgba(0,0,0,0.2);
+}
+.branding {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #4a9eda;
+  margin-bottom: 4px;
+}
+.page-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffffff 0%, #a8c8e8 50%, #4a9eda 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.main-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 16px;
+  padding: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.canvas-container {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(74,158,218,0.2);
+  border-radius: 14px;
+  padding: 16px;
+}
+.canvas-toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+canvas {
+  border-radius: 10px;
+  background: #0d1f3c;
+  display: block;
+  border: 1px solid rgba(74,158,218,0.15);
+  width: 100%;
+}
+.btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-primary { background: linear-gradient(135deg,#2a6eba,#4a9eda); color: white; }
+.btn-primary:hover { background: linear-gradient(135deg,#3a7eca,#5aaaea); transform: translateY(-1px); }
+.btn-secondary { background: rgba(74,158,218,0.1); color: #4a9eda; border: 1px solid rgba(74,158,218,0.3); }
+.btn-secondary:hover { background: rgba(74,158,218,0.2); transform: translateY(-1px); }
+.btn-secondary.active { background: rgba(74,158,218,0.3); border-color: #4a9eda; }
+.btn-success { background: linear-gradient(135deg,#1a8a5a,#2ab878); color: white; }
+.btn-success:hover { background: linear-gradient(135deg,#2a9a6a,#3ac888); transform: translateY(-1px); }
+.btn-lesson { background: linear-gradient(135deg,#8a4ab8,#b06ada); color: white; }
+.btn-lesson:hover { background: linear-gradient(135deg,#9a5ac8,#c07aea); transform: translateY(-1px); }
+.btn-screenshot { background: linear-gradient(135deg,#b87a1a,#d4a44a); color: white; }
+.btn-screenshot:hover { background: linear-gradient(135deg,#c88a2a,#e4b45a); transform: translateY(-1px); }
+.btn-pink { background: rgba(224,122,170,0.15); color: #e07aaa; border: 1px solid rgba(224,122,170,0.3); }
+.btn-pink:hover { background: rgba(224,122,170,0.25); }
+.btn-pink.active { background: rgba(224,122,170,0.4); border-color: rgba(224,122,170,0.7); }
+.right-panel { display: flex; flex-direction: column; gap: 12px; }
+.panel-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(74,158,218,0.15);
+  border-radius: 12px;
+  padding: 14px;
+}
+.panel-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #4a9eda;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(74,158,218,0.15);
+}
+.input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.input-group { display: flex; flex-direction: column; gap: 4px; }
+.input-label { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #8aa8c7; }
+.input-field {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 8px;
+  border-radius: 7px;
+  border: 1px solid rgba(74,158,218,0.2);
+  background: rgba(255,255,255,0.05);
+  color: #e8ecf1;
+  width: 100%;
+}
+.input-field:focus { outline: none; border-color: rgba(74,158,218,0.6); }
+.ratio-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.ratio-row:last-child { border-bottom: none; }
+.ratio-label { font-size: 12px; color: #8aa8c7; }
+.ratio-value { font-size: 13px; font-weight: 700; color: #e8ecf1; }
+.similarity-status {
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.status-similar { background: rgba(42,184,120,0.15); border: 1px solid rgba(42,184,120,0.4); }
+.status-not-similar { background: rgba(224,90,90,0.15); border: 1px solid rgba(224,90,90,0.4); }
+.status-icon { font-size: 20px; display: block; margin-bottom: 2px; }
+.status-text { font-size: 13px; font-weight: 700; letter-spacing: 1px; }
+.status-similar .status-text { color: #2ab878; }
+.status-not-similar .status-text { color: #e05a5a; }
+.postulate-badge {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(74,158,218,0.2);
+  color: #4a9eda;
+  border: 1px solid rgba(74,158,218,0.3);
+}
+.angle-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 6px; }
+.angle-table th { font-size: 10px; font-weight: 700; color: #5a7a9a; padding: 3px 4px; text-align: center; }
+.angle-table td { padding: 4px; text-align: center; font-weight: 600; }
+.angle-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 3px; vertical-align: middle; }
+.slider-group { margin-top: 8px; }
+.slider-label { font-size: 11px; font-weight: 600; color: #8aa8c7; display: flex; justify-content: space-between; margin-bottom: 4px; }
+input[type="range"] { width: 100%; accent-color: #4a9eda; cursor: pointer; }
+.transform-row { display: flex; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
+.legend { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #8aa8c7; }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+/* MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.75);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: linear-gradient(135deg,#0f1e35,#1a2f50);
+  border: 1px solid rgba(74,158,218,0.3);
+  border-radius: 16px;
+  padding: 28px;
+  max-width: 540px;
+  width: 92%;
+  position: relative;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.modal-title { font-size: 17px; font-weight: 700; color: #fff; }
+.modal-close { background: none; border: none; color: #8aa8c7; font-size: 22px; cursor: pointer; }
+.modal-close:hover { color: #fff; }
+.lesson-step { display: none; animation: fadeIn 0.3s ease; }
+.lesson-step.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.step-indicator { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #4a9eda; margin-bottom: 6px; }
+.step-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.step-body { font-size: 13px; color: #b0c4de; line-height: 1.7; margin-bottom: 12px; }
+.step-body strong { color: #e8ecf1; }
+.step-highlight {
+  background: rgba(74,158,218,0.1);
+  border-left: 3px solid #4a9eda;
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  margin: 10px 0;
+  font-size: 13px;
+  color: #a8c8e8;
+  line-height: 1.6;
+}
+.modal-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(74,158,218,0.15); }
+.step-dots { display: flex; gap: 6px; }
+.step-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(74,158,218,0.2); border: 1px solid rgba(74,158,218,0.3); cursor: pointer; transition: all 0.2s; }
+.step-dot.active { background: #4a9eda; border-color: #4a9eda; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="branding">📐 Jerry's Geometry Class</div>
+  <div class="page-title">Similar Triangles Explorer</div>
+</div>
+
+<div class="main-layout">
+
+  <!-- CANVAS SIDE -->
+  <div class="canvas-container">
+    <div class="canvas-toolbar">
+      <button class="btn btn-secondary active" id="btnDrag" onclick="setMode('drag')">✋ Drag Vertices</button>
+      <button class="btn btn-success" onclick="resetAll()">↺ Reset</button>
+      <button class="btn btn-screenshot" onclick="takeScreenshot()">📸 Screenshot</button>
+      <button class="btn btn-lesson" onclick="openLesson()">📖 Guided Lesson</button>
+    </div>
+    <canvas id="mainCanvas" width="740" height="500"></canvas>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#4a9eda"></div>Triangle 1 (Reference)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#e07aaa"></div>Triangle 2 (Drag vertices to explore)</div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+
+    <!-- Triangle 1 Inputs -->
+    <div class="panel-card">
+      <div class="panel-title">🔵 Triangle 1 — Reference</div>
+      <div class="input-grid">
+        <div class="input-group">
+          <div class="input-label">Angle A (°)</div>
+          <input class="input-field" id="t1AngleA" type="number" min="1" max="177" value="50" oninput="updateTriangle1()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Angle B (°)</div>
+          <input class="input-field" id="t1AngleB" type="number" min="1" max="177" value="70" oninput="updateTriangle1()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Angle C (°)</div>
+          <input class="input-field" id="t1AngleC" type="number" value="60" readonly style="opacity:0.6">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Scale (px)</div>
+          <input class="input-field" id="t1Scale" type="number" min="60" max="220" value="150" oninput="updateTriangle1()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Similarity Status -->
+    <div class="panel-card">
+      <div class="panel-title">⚖️ Similarity Status</div>
+      <div class="similarity-status status-similar" id="simStatus">
+        <span class="status-icon" id="simIcon">✅</span>
+        <div class="status-text" id="simText">SIMILAR</div>
+        <div class="postulate-badge" id="simPostulate">AA Similarity</div>
+      </div>
+      <table class="angle-table">
+        <tr>
+          <th></th><th>△1</th><th>△2</th><th>✓</th>
+        </tr>
+        <tr>
+          <td><span class="angle-dot" style="background:#f4a44a"></span>A/D</td>
+          <td id="d1A">50°</td><td id="d2A">—</td><td id="mA">—</td>
+        </tr>
+        <tr>
+          <td><span class="angle-dot" style="background:#2ab878"></span>B/E</td>
+          <td id="d1B">70°</td><td id="d2B">—</td><td id="mB">—</td>
+        </tr>
+        <tr>
+          <td><span class="angle-dot" style="background:#c75a8a"></span>C/F</td>
+          <td id="d1C">60°</td><td id="d2C">—</td><td id="mC">—</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Side Ratios -->
+    <div class="panel-card">
+      <div class="panel-title">📏 Side Ratios (△2 ÷ △1)</div>
+      <div class="ratio-row"><span class="ratio-label">AB / DE</span><span class="ratio-value" id="rAB">—</span></div>
+      <div class="ratio-row"><span class="ratio-label">BC / EF</span><span class="ratio-value" id="rBC">—</span></div>
+      <div class="ratio-row"><span class="ratio-label">CA / FD</span><span class="ratio-value" id="rCA">—</span></div>
+      <div class="ratio-row"><span class="ratio-label" style="color:#4a9eda;font-weight:700">Scale Factor</span><span class="ratio-value" id="rScale" style="color:#4a9eda">—</span></div>
+    </div>
+
+    <!-- Transformations -->
+    <div class="panel-card">
+      <div class="panel-title">🔄 Transformations (Triangle 2)</div>
+      <div class="transform-row">
+        <button class="btn btn-pink" id="btnRH" onclick="toggleReflectH()">↔ Reflect H</button>
+        <button class="btn btn-pink" id="btnRV" onclick="toggleReflectV()">↕ Reflect V</button>
+      </div>
+      <div class="slider-group">
+        <div class="slider-label"><span>🔄 Rotation</span><span id="rotVal">0°</span></div>
+        <input type="range" id="rotSlider" min="0" max="360" value="0" oninput="setRotation(this.value)">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label"><span>🔍 Dilation</span><span id="dilVal">1.00×</span></div>
+        <input type="range" id="dilSlider" min="30" max="280" value="100" oninput="setDilation(this.value)">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- GUIDED LESSON MODAL -->
+<div class="modal-overlay" id="lessonModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">📖 Similar Triangles — Guided Lesson</div>
+      <button class="modal-close" onclick="closeLesson()">✕</button>
+    </div>
+
+    <div class="lesson-step active" id="ls1">
+      <div class="step-indicator">Step 1 of 7</div>
+      <div class="step-title">What Are Similar Triangles?</div>
+      <div class="step-body">Two triangles are <strong>similar</strong> when they have the same shape but are not necessarily the same size.<br><br>For two triangles to be similar:<br>• All <strong>corresponding angles must be equal</strong><br>• All <strong>corresponding sides must be proportional</strong></div>
+      <div class="step-highlight">📐 We write similarity using the ~ symbol. Example: △ABC ~ △DEF means triangle ABC is similar to triangle DEF.</div>
+    </div>
+
+    <div class="lesson-step" id="ls2">
+      <div class="step-indicator">Step 2 of 7</div>
+      <div class="step-title">Setting Up Triangle 1</div>
+      <div class="step-body">Look at the <strong>blue panel</strong> on the right labeled "Triangle 1 — Reference."<br><br>• Enter values for <strong>Angle A</strong> and <strong>Angle B</strong><br>• <strong>Angle C</strong> calculates automatically because all angles in a triangle must sum to <strong>180°</strong><br>• Adjust <strong>Scale</strong> to change the size of Triangle 1</div>
+      <div class="step-highlight">🔑 Key Fact: The three interior angles of any triangle always sum to 180°. This is called the Triangle Angle Sum Theorem.</div>
+    </div>
+
+    <div class="lesson-step" id="ls3">
+      <div class="step-indicator">Step 3 of 7</div>
+      <div class="step-title">Exploring Triangle 2</div>
+      <div class="step-body">Triangle 2 is shown in <strong>pink/rose</strong> on the canvas. The vertices are labeled D, E, and F.<br><br>• Make sure <strong>"✋ Drag Vertices"</strong> mode is selected<br>• Click and drag any <strong>corner point</strong> of Triangle 2<br>• Watch the angle measurements update live in the <strong>Similarity Status</strong> panel</div>
+      <div class="step-highlight">👀 Observe: As you drag the vertices, do the angles of Triangle 2 start matching Triangle 1? Watch for the ✅ and ❌ indicators to change!</div>
+    </div>
+
+    <div class="lesson-step" id="ls4">
+      <div class="step-indicator">Step 4 of 7</div>
+      <div class="step-title">The AA Similarity Postulate</div>
+      <div class="step-body">The <strong>Angle-Angle (AA) Similarity Postulate</strong> states:<br><br><em>If two angles of one triangle are congruent to two angles of another triangle, then the two triangles are similar.</em><br><br>You only need to verify <strong>two pairs of angles</strong> — the third pair will automatically be equal since all angles must sum to 180°.</div>
+      <div class="step-highlight">🎯 Try it: Drag Triangle 2 until two of its angles match Triangle 1. The postulate badge should display <strong>AA Similarity</strong>!</div>
+    </div>
+
+    <div class="lesson-step" id="ls5">
+      <div class="step-indicator">Step 5 of 7</div>
+      <div class="step-title">Proportional Side Ratios</div>
+      <div class="step-body">When two triangles are similar, their corresponding sides are always in the same ratio. Look at the <strong>Side Ratios panel</strong>.<br><br>• The ratios <strong>AB/DE</strong>, <strong>BC/EF</strong>, and <strong>CA/FD</strong> should all be equal<br>• This common ratio is called the <strong>scale factor</strong><br>• The scale factor tells you how many times larger or smaller one triangle is</div>
+      <div class="step-highlight">📏 Try resizing Triangle 2 by dragging its vertices outward. Notice the individual side lengths change, but the ratios between corresponding sides stay equal!</div>
+    </div>
+
+    <div class="lesson-step" id="ls6">
+      <div class="step-indicator">Step 6 of 7</div>
+      <div class="step-title">Similarity Transformations</div>
+      <div class="step-body">Similarity is <strong>preserved</strong> through the following transformations — the triangles remain similar even after:<br><br>• <strong>Dilation</strong> — resizing changes the size but not the shape<br>• <strong>Rotation</strong> — spinning the triangle any number of degrees<br>• <strong>Reflection</strong> — flipping the triangle horizontally or vertically</div>
+      <div class="step-highlight">🔄 Try the Transformations panel! Rotate and dilate Triangle 2 using the sliders. Flip it using Reflect H or V. Notice the Similarity Status stays ✅ Similar throughout!</div>
+    </div>
+
+    <div class="lesson-step" id="ls7">
+      <div class="step-indicator">Step 7 of 7</div>
+      <div class="step-title">SSS and SAS Similarity</div>
+      <div class="step-body">There are two additional similarity postulates:<br><br>• <strong>SSS Similarity:</strong> If all three pairs of corresponding sides are proportional, the triangles are similar.<br><br>• <strong>SAS Similarity:</strong> If two pairs of corresponding sides are proportional AND the included angles between those sides are congruent, the triangles are similar.</div>
+      <div class="step-highlight">🏆 You now know all three similarity postulates: <strong>AA, SSS, and SAS</strong>. The postulate badge in the Similarity Status panel identifies which one applies as you explore!</div>
+    </div>
+
+    <div class="modal-nav">
+      <button class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)">← Prev</button>
+      <div class="step-dots" id="stepDots"></div>
+      <button class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d');
+let mode = 'drag';
+let dragging = null;
+let currentStep = 1;
+const TOTAL_STEPS = 7;
+let reflectH = false, reflectV = false;
+let rotationDeg = 0, dilationFactor = 1.0;
+
+// Triangle 1 — reference, built from inputs
+let t1 = { A:{x:80,y:440}, B:{x:280,y:440}, C:{x:160,y:220}, aA:50, aB:70, aC:60 };
+
+// Triangle 2 — interactive base positions
+let t2base = { A:{x:420,y:440}, B:{x:660,y:440}, C:{x:530,y:200} };
+let t2 = { A:{x:420,y:440}, B:{x:660,y:440}, C:{x:530,y:200} };
+
+// ==============================
+// MATH HELPERS
+// ==============================
+function dist(p,q){ return Math.sqrt((q.x-p.x)**2+(q.y-p.y)**2); }
+
+function getAngle(p1, vertex, p2){
+  const v1={x:p1.x-vertex.x, y:p1.y-vertex.y};
+  const v2={x:p2.x-vertex.x, y:p2.y-vertex.y};
+  const dot=v1.x*v2.x+v1.y*v2.y;
+  const mag=Math.sqrt(v1.x**2+v1.y**2)*Math.sqrt(v2.x**2+v2.y**2);
+  if(mag===0) return 0;
+  return Math.round(Math.acos(Math.max(-1,Math.min(1,dot/mag)))*180/Math.PI);
+}
+
+function centroid(t){ return {x:(t.A.x+t.B.x+t.C.x)/3, y:(t.A.y+t.B.y+t.C.y)/3}; }
+
+function rotatePoint(p, cx, cy, deg){
+  const r=deg*Math.PI/180;
+  const dx=p.x-cx, dy=p.y-cy;
+  return { x:cx+dx*Math.cos(r)-dy*Math.sin(r), y:cy+dx*Math.sin(r)+dy*Math.cos(r) };
+}
+
+// ==============================
+// TRIANGLE 1 — BUILD FROM INPUTS
+// ==============================
+function updateTriangle1(){
+  const aA=parseFloat(document.getElementById('t1AngleA').value)||50;
+  const aB=parseFloat(document.getElementById('t1AngleB').value)||70;
+  const aC=180-aA-aB;
+  if(aC<=0||aA<=0||aB<=0){ return; }
+  document.getElementById('t1AngleC').value=aC;
+  t1.aA=aA; t1.aB=aB; t1.aC=aC;
+  const scale=parseFloat(document.getElementById('t1Scale').value)||150;
+  const aARad=aA*Math.PI/180;
+  const aBRad=aB*Math.PI/180;
+  const aCRad=aC*Math.PI/180;
+  // Use law of sines to get side lengths relative to scale
+  const sinA=Math.sin(aARad), sinB=Math.sin(aBRad), sinC=Math.sin(aCRad);
+  const sideC=scale; // base side (opposite angle C)
+  const sideA=sideC*sinA/sinC;
+  const sideB=sideC*sinB/sinC;
+  const bx=80, by=450;
+  t1.A={x:bx, y:by};
+  t1.B={x:bx+sideC, y:by};
+  const Cx=bx+sideB*Math.cos(aARad);
+  const Cy=by-sideB*Math.sin(aARad);
+  t1.C={x:Cx, y:Cy};
+  document.getElementById('d1A').textContent=aA+'°';
+  document.getElementById('d1B').textContent=aB+'°';
+  document.getElementById('d1C').textContent=aC+'°';
+  redraw();
+  updatePanel();
+}
+
+// ==============================
+// TRIANGLE 2 ANGLES
+// ==============================
+function getT2Angles(){
+  return {
+    A: getAngle(t2.B, t2.A, t2.C),
+    B: getAngle(t2.A, t2.B, t2.C),
+    C: getAngle(t2.A, t2.C, t2.B)
+  };
+}
+
+// ==============================
+// SIMILARITY CHECK
+// ==============================
+function checkSimilarity(){
+  const ang2=getT2Angles();
+  const t1sorted=[t1.aA,t1.aB,t1.aC].sort((a,b)=>a-b);
+  const t2sorted=[ang2.A,ang2.B,ang2.C].sort((a,b)=>a-b);
+  const TOL=4;
+  let angleMatches=0;
+  for(let i=0;i<3;i++) if(Math.abs(t1sorted[i]-t2sorted[i])<=TOL) angleMatches++;
+
+  const ab1=dist(t1.A,t1.B), bc1=dist(t1.B,t1.C), ca1=dist(t1.C,t1.A);
+  const ab2=dist(t2.A,t2.B), bc2=dist(t2.B,t2.C), ca2=dist(t2.C,t2.A);
+  const r1=ab2/ab1, r2=bc2/bc1, r3=ca2/ca1;
+  const sidesProp=Math.abs(r1-r2)<0.06&&Math.abs(r2-r3)<0.06;
+
+  let similar=false, postulate='';
+  if(angleMatches>=2){ similar=true; postulate='AA Similarity'; }
+  else if(sidesProp){ similar=true; postulate='SSS Similarity'; }
+  else if(angleMatches>=1&&sidesProp){ similar=true; postulate='SAS Similarity'; }
+
+  return {similar, postulate, ang2, r1, r2, r3};
+}
+
+// ==============================
+// UPDATE PANEL
+// ==============================
+function updatePanel(){
+  const {similar,postulate,ang2,r1,r2,r3}=checkSimilarity();
+  const statusEl=document.getElementById('simStatus');
+  statusEl.className='similarity-status '+(similar?'status-similar':'status-not-similar');
+  document.getElementById('simIcon').textContent=similar?'✅':'❌';
+  document.getElementById('simText').textContent=similar?'SIMILAR':'NOT SIMILAR';
+  const badge=document.getElementById('simPostulate');
+  badge.textContent=postulate||'';
+  badge.style.display=postulate?'inline-block':'none';
+
+  document.getElementById('d2A').textContent=ang2.A+'°';
+  document.getElementById('d2B').textContent=ang2.B+'°';
+  document.getElementById('d2C').textContent=ang2.C+'°';
+
+  const TOL=4;
+  document.getElementById('mA').textContent=Math.abs(t1.aA-ang2.A)<=TOL?'✅':'❌';
+  document.getElementById('mB').textContent=Math.abs(t1.aB-ang2.B)<=TOL?'✅':'❌';
+  document.getElementById('mC').textContent=Math.abs(t1.aC-ang2.C)<=TOL?'✅':'❌';
+
+  document.getElementById('rAB').textContent=r1.toFixed(2);
+  document.getElementById('rBC').textContent=r2.toFixed(2);
+  document.getElementById('rCA').textContent=r3.toFixed(2);
+  const avg=((r1+r2+r3)/3).toFixed(2);
+  document.getElementById('rScale').textContent=avg+'×';
+}
+
+// ==============================
+// DRAW
+// ==============================
+function redraw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawGrid();
+  drawTriangle(t1,'#4a9eda',false,t1.aA,t1.aB,t1.aC,'A','B','C');
+  const ang2=getT2Angles();
+  drawTriangle(t2,'#e07aaa',true,ang2.A,ang2.B,ang2.C,'D','E','F');
+}
+
+function drawGrid(){
+  ctx.strokeStyle='rgba(74,158,218,0.06)';
+  ctx.lineWidth=1;
+  for(let x=0;x<canvas.width;x+=40){ ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke(); }
+  for(let y=0;y<canvas.height;y+=40){ ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke(); }
+}
+
+function drawTriangle(t, color, draggable, aA, aB, aC, lA, lB, lC){
+  // Fill
+  ctx.beginPath();
+  ctx.moveTo(t.A.x,t.A.y);
+  ctx.lineTo(t.B.x,t.B.y);
+  ctx.lineTo(t.C.x,t.C.y);
+  ctx.closePath();
+  ctx.fillStyle=color+'18';
+  ctx.fill();
+  ctx.strokeStyle=color;
+  ctx.lineWidth=2.5;
+  ctx.stroke();
+
+  // Angle arcs with matching colors
+  drawArc(t.B,t.A,t.C,'#f4a44a',aA+'°');
+  drawArc(t.A,t.B,t.C,'#2ab878',aB+'°');
+  drawArc(t.A,t.C,t.B,'#c75a8a',aC+'°');
+
+  // Side length labels
+  drawSideLabel(t.A,t.B,color);
+  drawSideLabel(t.B,t.C,color);
+  drawSideLabel(t.C,t.A,color);
+
+  // Vertex labels & dots
+  drawVertexLabel(t.A,color,lA,draggable);
+  drawVertexLabel(t.B,color,lB,draggable);
+  drawVertexLabel(t.C,color,lC,draggable);
+}
+
+function drawArc(p1, vertex, p2, color, label){
+  const v1={x:p1.x-vertex.x,y:p1.y-vertex.y};
+  const v2={x:p2.x-vertex.x,y:p2.y-vertex.y};
+  const a1=Math.atan2(v1.y,v1.x);
+  const a2=Math.atan2(v2.y,v2.x);
+  const r=18;
+  ctx.beginPath();
+  ctx.arc(vertex.x,vertex.y,r,a1,a2);
+  ctx.strokeStyle=color;
+  ctx.lineWidth=2;
+  ctx.stroke();
+  const mid=(a1+a2)/2;
+  const lx=vertex.x+(r+13)*Math.cos(mid);
+  const ly=vertex.y+(r+13)*Math.sin(mid);
+  ctx.fillStyle=color;
+  ctx.font='bold 10px Jost,sans-serif';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText(label,lx,ly);
+}
+
+function drawSideLabel(p1, p2, color){
+  const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+  const d=dist(p1,p2).toFixed(1);
+  ctx.fillStyle=color+'cc';
+  ctx.font='500 10px Jost,sans-serif';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText(d,mx,my-8);
+}
+
+function drawVertexLabel(p, color, label, draggable){
+  const r=draggable?9:5;
+  ctx.beginPath();
+  ctx.arc(p.x,p.y,r,0,Math.PI*2);
+  ctx.fillStyle=color;
+  ctx.fill();
+  if(draggable){ ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke(); }
+  ctx.fillStyle='#fff';
+  ctx.font='bold 12px Jost,sans-serif';
+  ctx.textAlign='center';
+  ctx.textBaseline='bottom';
+  ctx.fillText(label,p.x,p.y-12);
+}
+
+// ==============================
+// DRAG INTERACTION
+// ==============================
+canvas.addEventListener('mousedown', e=>{
+  if(mode!=='drag') return;
+  const rect=canvas.getBoundingClientRect();
+  const scaleX=canvas.width/rect.width;
+  const scaleY=canvas.height/rect.height;
+  const mx=(e.clientX-rect.left)*scaleX;
+  const my=(e.clientY-rect.top)*scaleY;
+  for(const key of ['A','B','C']){
+    if(dist({x:mx,y:my},t2[key])<18){
+      dragging=key; break;
+    }
+  }
+});
+
+canvas.addEventListener('mousemove', e=>{
+  if(!dragging) return;
+  const rect=canvas.getBoundingClientRect();
+  const scaleX=canvas.width/rect.width;
+  const scaleY=canvas.height/rect.height;
+  const mx=(e.clientX-rect.left)*scaleX;
+  const my=(e.clientY-rect.top)*scaleY;
+  t2[dragging]={x:mx,y:my};
+  t2base[dragging]={x:mx,y:my};
+  redraw();
+  updatePanel();
+});
+
+canvas.addEventListener('mouseup', ()=>{ dragging=null; });
+canvas.addEventListener('mouseleave', ()=>{ dragging=null; });
+
+// Cursor feedback
+canvas.addEventListener('mousemove', e=>{
+  if(mode!=='drag'){ canvas.style.cursor='default'; return; }
+  const rect=canvas.getBoundingClientRect();
+  const scaleX=canvas.width/rect.width;
+  const scaleY=canvas.height/rect.height;
+  const mx=(e.clientX-rect.left)*scaleX;
+  const my=(e.clientY-rect.top)*scaleY;
+  let hover=false;
+  for(const key of ['A','B','C']){
+    if(dist({x:mx,y:my},t2[key])<18){ hover=true; break; }
+  }
+  canvas.style.cursor=hover?'grab':'crosshair';
+});
+
+// ==============================
+// MODE
+// ==============================
+function setMode(m){
+  mode=m;
+  document.getElementById('btnDrag').classList.toggle('active', m==='drag');
+}
+
+// ==============================
+// TRANSFORMATIONS
+// ==============================
+function applyTransforms(){
+  const c=centroid(t2base);
+  for(const key of ['A','B','C']){
+    let p={...t2base[key]};
+    // Dilation
+    p={x:c.x+(p.x-c.x)*dilationFactor, y:c.y+(p.y-c.y)*dilationFactor};
+    // Reflect H
+    if(reflectH) p={x:2*c.x-p.x, y:p.y};
+    // Reflect V
+    if(reflectV) p={x:p.x, y:2*c.y-p.y};
+    // Rotation
+    p=rotatePoint(p,c.x,c.y,rotationDeg);
+    t2[key]=p;
+  }
+  redraw();
+  updatePanel();
+}
+
+function toggleReflectH(){
+  reflectH=!reflectH;
+  document.getElementById('btnRH').classList.toggle('active',reflectH);
+  applyTransforms();
+}
+
+function toggleReflectV(){
+  reflectV=!reflectV;
+  document.getElementById('btnRV').classList.toggle('active',reflectV);
+  applyTransforms();
+}
+
+function setRotation(v){
+  rotationDeg=parseFloat(v);
+  document.getElementById('rotVal').textContent=v+'°';
+  applyTransforms();
+}
+
+function setDilation(v){
+  dilationFactor=parseFloat(v)/100;
+  document.getElementById('dilVal').textContent=dilationFactor.toFixed(2)+'×';
+  applyTransforms();
+}
+
+// ==============================
+// RESET
+// ==============================
+function resetAll(){
+  t2base={A:{x:420,y:440},B:{x:660,y:440},C:{x:530,y:200}};
+  t2={A:{x:420,y:440},B:{x:660,y:440},C:{x:530,y:200}};
+  reflectH=false; reflectV=false; rotationDeg=0; dilationFactor=1.0;
+  document.getElementById('rotSlider').value=0;
+  document.getElementById('dilSlider').value=100;
+  document.getElementById('rotVal').textContent='0°';
+  document.getElementById('dilVal').textContent='1.00×';
+  document.getElementById('btnRH').classList.remove('active');
+  document.getElementById('btnRV').classList.remove('active');
+  document.getElementById('t1AngleA').value=50;
+  document.getElementById('t1AngleB').value=70;
+  document.getElementById('t1Scale').value=150;
+  updateTriangle1();
+}
+
+// ==============================
+// SCREENSHOT
+// ==============================
+function takeScreenshot(){
+  redraw();
+  const link=document.createElement('a');
+  link.download='similar-triangles-jerrys-geometry.png';
+  link.href=canvas.toDataURL('image/png');
+  link.click();
+}
+
+// ==============================
+// GUIDED LESSON
+// ==============================
+function buildDots(){
+  const container=document.getElementById('stepDots');
+  container.innerHTML='';
+  for(let i=1;i<=TOTAL_STEPS;i++){
+    const d=document.createElement('div');
+    d.className='step-dot'+(i===currentStep?' active':'');
+    d.onclick=()=>goToStep(i);
+    container.appendChild(d);
+  }
+}
+
+function goToStep(n){
+  document.getElementById('ls'+currentStep).classList.remove('active');
+  currentStep=n;
+  document.getElementById('ls'+currentStep).classList.add('active');
+  document.getElementById('prevBtn').style.visibility=currentStep===1?'hidden':'visible';
+  document.getElementById('nextBtn').textContent=currentStep===TOTAL_STEPS?'✓ Done':'Next →';
+  buildDots();
+}
+
+function changeStep(dir){
+  if(dir===1&&currentStep===TOTAL_STEPS){ closeLesson(); return; }
+  const next=Math.max(1,Math.min(TOTAL_STEPS,currentStep+dir));
+  goToStep(next);
+}
+
+function openLesson(){
+  currentStep=1;
+  goToStep(1);
+  document.getElementById('lessonModal').classList.add('active');
+}
+
+function closeLesson(){
+  document.getElementById('lessonModal').classList.remove('active');
+}
+
+// ==============================
+// INIT
+// ==============================
+buildDots();
+updateTriangle1();
+redraw();
+updatePanel();
+</script>
+</body>
+</html>
