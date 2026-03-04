@@ -6,213 +6,74 @@
 <title>Similar Triangles Explorer — Jerry's Geometry Class</title>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Jost', sans-serif;
-  background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 40%, #2a3f6e 100%);
-  min-height: 100vh;
-  color: #e8ecf1;
-}
-.header {
-  text-align: center;
-  padding: 20px;
-  border-bottom: 1px solid rgba(74,158,218,0.2);
-  background: rgba(0,0,0,0.2);
-}
-.branding {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #4a9eda;
-  margin-bottom: 4px;
-}
-.page-title {
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  background: linear-gradient(135deg, #ffffff 0%, #a8c8e8 50%, #4a9eda 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.main-layout {
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 16px;
-  padding: 16px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.canvas-container {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(74,158,218,0.2);
-  border-radius: 14px;
-  padding: 16px;
-}
-.canvas-toolbar {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-canvas {
-  border-radius: 10px;
-  background: #0d1f3c;
-  display: block;
-  border: 1px solid rgba(74,158,218,0.15);
-  width: 100%;
-}
-.btn {
-  font-family: 'Jost', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.btn-primary { background: linear-gradient(135deg,#2a6eba,#4a9eda); color: white; }
-.btn-primary:hover { background: linear-gradient(135deg,#3a7eca,#5aaaea); transform: translateY(-1px); }
-.btn-secondary { background: rgba(74,158,218,0.1); color: #4a9eda; border: 1px solid rgba(74,158,218,0.3); }
-.btn-secondary:hover { background: rgba(74,158,218,0.2); }
-.btn-secondary.active { background: rgba(74,158,218,0.3); border-color: #4a9eda; }
-.btn-success { background: linear-gradient(135deg,#1a8a5a,#2ab878); color: white; }
-.btn-success:hover { background: linear-gradient(135deg,#2a9a6a,#3ac888); }
-.btn-lesson { background: linear-gradient(135deg,#8a4ab8,#b06ada); color: white; }
-.btn-lesson:hover { background: linear-gradient(135deg,#9a5ac8,#c07aea); }
-.btn-screenshot { background: linear-gradient(135deg,#b87a1a,#d4a44a); color: white; }
-.btn-screenshot:hover { background: linear-gradient(135deg,#c88a2a,#e4b45a); }
-.btn-pink { background: rgba(224,122,170,0.15); color: #e07aaa; border: 1px solid rgba(224,122,170,0.3); }
-.btn-pink:hover { background: rgba(224,122,170,0.25); }
-.btn-pink.active { background: rgba(224,122,170,0.4); border-color: rgba(224,122,170,0.7); }
-.right-panel { display: flex; flex-direction: column; gap: 12px; }
-.panel-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(74,158,218,0.15);
-  border-radius: 12px;
-  padding: 14px;
-}
-.panel-title {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #4a9eda;
-  margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(74,158,218,0.15);
-}
-.input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
-.input-group { display: flex; flex-direction: column; gap: 4px; }
-.input-label { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #8aa8c7; }
-.input-field {
-  font-family: 'Jost', sans-serif;
-  font-size: 13px;
-  padding: 6px 8px;
-  border-radius: 7px;
-  border: 1px solid rgba(74,158,218,0.2);
-  background: rgba(255,255,255,0.05);
-  color: #e8ecf1;
-  width: 100%;
-}
-.input-field:focus { outline: none; border-color: rgba(74,158,218,0.6); }
-.ratio-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-.ratio-row:last-child { border-bottom: none; }
-.ratio-label { font-size: 12px; color: #8aa8c7; }
-.ratio-value { font-size: 13px; font-weight: 700; color: #e8ecf1; }
-.similarity-status {
-  text-align: center;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 8px;
-  transition: all 0.3s;
-}
-.status-similar { background: rgba(42,184,120,0.15); border: 1px solid rgba(42,184,120,0.4); }
-.status-not-similar { background: rgba(224,90,90,0.15); border: 1px solid rgba(224,90,90,0.4); }
-.status-icon { font-size: 20px; display: block; margin-bottom: 2px; }
-.status-text { font-size: 13px; font-weight: 700; letter-spacing: 1px; }
-.status-similar .status-text { color: #2ab878; }
-.status-not-similar .status-text { color: #e05a5a; }
-.postulate-badge {
-  display: none;
-  margin-top: 4px;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
-  background: rgba(74,158,218,0.2);
-  color: #4a9eda;
-  border: 1px solid rgba(74,158,218,0.3);
-}
-.angle-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 6px; }
-.angle-table th { font-size: 10px; font-weight: 700; color: #5a7a9a; padding: 3px 4px; text-align: center; }
-.angle-table td { padding: 4px; text-align: center; font-weight: 600; }
-.angle-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 3px; vertical-align: middle; }
-.slider-group { margin-top: 8px; }
-.slider-label { font-size: 11px; font-weight: 600; color: #8aa8c7; display: flex; justify-content: space-between; margin-bottom: 4px; }
-input[type="range"] { width: 100%; accent-color: #4a9eda; cursor: pointer; }
-.transform-row { display: flex; gap: 6px; margin-bottom: 6px; }
-.legend { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
-.legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #8aa8c7; }
-.legend-dot { width: 12px; height: 12px; border-radius: 50%; }
-.modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.75);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-}
-.modal-overlay.active { display: flex; }
-.modal {
-  background: linear-gradient(135deg,#0f1e35,#1a2f50);
-  border: 1px solid rgba(74,158,218,0.3);
-  border-radius: 16px;
-  padding: 28px;
-  max-width: 540px;
-  width: 92%;
-  max-height: 88vh;
-  overflow-y: auto;
-}
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-.modal-title { font-size: 17px; font-weight: 700; color: #fff; }
-.modal-close { background: none; border: none; color: #8aa8c7; font-size: 22px; cursor: pointer; }
-.modal-close:hover { color: #fff; }
-.lesson-step { display: none; animation: fadeIn 0.3s ease; }
-.lesson-step.active { display: block; }
-@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-.step-indicator { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #4a9eda; margin-bottom: 6px; }
-.step-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-.step-body { font-size: 13px; color: #b0c4de; line-height: 1.7; margin-bottom: 12px; }
-.step-body strong { color: #e8ecf1; }
-.step-highlight {
-  background: rgba(74,158,218,0.1);
-  border-left: 3px solid #4a9eda;
-  border-radius: 0 8px 8px 0;
-  padding: 10px 14px;
-  margin: 10px 0;
-  font-size: 13px;
-  color: #a8c8e8;
-  line-height: 1.6;
-}
-.modal-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(74,158,218,0.15); }
-.step-dots { display: flex; gap: 6px; }
-.step-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(74,158,218,0.2); border: 1px solid rgba(74,158,218,0.3); cursor: pointer; transition: all 0.2s; }
-.step-dot.active { background: #4a9eda; border-color: #4a9eda; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Jost',sans-serif;background:linear-gradient(135deg,#0a1628 0%,#1a2a4a 40%,#2a3f6e 100%);min-height:100vh;color:#e8ecf1;}
+.header{text-align:center;padding:20px;border-bottom:1px solid rgba(74,158,218,0.2);background:rgba(0,0,0,0.2);}
+.branding{font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#4a9eda;margin-bottom:4px;}
+.page-title{font-size:28px;font-weight:800;letter-spacing:2px;text-transform:uppercase;background:linear-gradient(135deg,#fff 0%,#a8c8e8 50%,#4a9eda 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.main-layout{display:grid;grid-template-columns:1fr 300px;gap:16px;padding:16px;max-width:1100px;margin:0 auto;}
+.canvas-container{background:rgba(255,255,255,0.03);border:1px solid rgba(74,158,218,0.2);border-radius:14px;padding:16px;}
+.canvas-toolbar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center;}
+canvas{border-radius:10px;background:#0d1f3c;display:block;border:1px solid rgba(74,158,218,0.15);width:100%;}
+.btn{font-family:'Jost',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:8px 14px;border-radius:8px;border:none;cursor:pointer;transition:all 0.2s ease;}
+.btn-secondary{background:rgba(74,158,218,0.1);color:#4a9eda;border:1px solid rgba(74,158,218,0.3);}
+.btn-secondary.active{background:rgba(74,158,218,0.3);border-color:#4a9eda;}
+.btn-success{background:linear-gradient(135deg,#1a8a5a,#2ab878);color:white;}
+.btn-lesson{background:linear-gradient(135deg,#8a4ab8,#b06ada);color:white;}
+.btn-screenshot{background:linear-gradient(135deg,#b87a1a,#d4a44a);color:white;}
+.btn-pink{background:rgba(224,122,170,0.15);color:#e07aaa;border:1px solid rgba(224,122,170,0.3);}
+.btn-pink.active{background:rgba(224,122,170,0.4);border-color:rgba(224,122,170,0.7);}
+.btn-primary{background:linear-gradient(135deg,#2a6eba,#4a9eda);color:white;}
+.right-panel{display:flex;flex-direction:column;gap:12px;}
+.panel-card{background:rgba(255,255,255,0.04);border:1px solid rgba(74,158,218,0.15);border-radius:12px;padding:14px;}
+.panel-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#4a9eda;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(74,158,218,0.15);}
+.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.input-group{display:flex;flex-direction:column;gap:4px;}
+.input-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#8aa8c7;}
+.input-field{font-family:'Jost',sans-serif;font-size:13px;padding:6px 8px;border-radius:7px;border:1px solid rgba(74,158,218,0.2);background:rgba(255,255,255,0.05);color:#e8ecf1;width:100%;}
+.input-field:focus{outline:none;border-color:rgba(74,158,218,0.6);}
+.ratio-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.ratio-row:last-child{border-bottom:none;}
+.ratio-label{font-size:12px;color:#8aa8c7;}
+.ratio-value{font-size:13px;font-weight:700;color:#e8ecf1;}
+.similarity-status{text-align:center;padding:10px;border-radius:10px;margin-bottom:8px;transition:all 0.3s;}
+.status-similar{background:rgba(42,184,120,0.15);border:1px solid rgba(42,184,120,0.4);}
+.status-not-similar{background:rgba(224,90,90,0.15);border:1px solid rgba(224,90,90,0.4);}
+.status-icon{font-size:20px;display:block;margin-bottom:2px;}
+.status-text{font-size:13px;font-weight:700;letter-spacing:1px;}
+.status-similar .status-text{color:#2ab878;}
+.status-not-similar .status-text{color:#e05a5a;}
+.postulate-badge{display:none;margin-top:4px;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(74,158,218,0.2);color:#4a9eda;border:1px solid rgba(74,158,218,0.3);}
+.angle-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px;}
+.angle-table th{font-size:10px;font-weight:700;color:#5a7a9a;padding:3px 4px;text-align:center;}
+.angle-table td{padding:4px;text-align:center;font-weight:600;}
+.angle-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px;vertical-align:middle;}
+.slider-group{margin-top:8px;}
+.slider-label{font-size:11px;font-weight:600;color:#8aa8c7;display:flex;justify-content:space-between;margin-bottom:4px;}
+input[type="range"]{width:100%;accent-color:#4a9eda;cursor:pointer;}
+.transform-row{display:flex;gap:6px;margin-bottom:6px;}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#8aa8c7;}
+.legend-dot{width:12px;height:12px;border-radius:50%;}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;}
+.modal-overlay.active{display:flex;}
+.modal{background:linear-gradient(135deg,#0f1e35,#1a2f50);border:1px solid rgba(74,158,218,0.3);border-radius:16px;padding:28px;max-width:540px;width:92%;max-height:88vh;overflow-y:auto;}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+.modal-title{font-size:17px;font-weight:700;color:#fff;}
+.modal-close{background:none;border:none;color:#8aa8c7;font-size:22px;cursor:pointer;}
+.modal-close:hover{color:#fff;}
+.lesson-step{display:none;animation:fadeIn 0.3s ease;}
+.lesson-step.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.step-indicator{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#4a9eda;margin-bottom:6px;}
+.step-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;}
+.step-body{font-size:13px;color:#b0c4de;line-height:1.7;margin-bottom:12px;}
+.step-body strong{color:#e8ecf1;}
+.step-highlight{background:rgba(74,158,218,0.1);border-left:3px solid #4a9eda;border-radius:0 8px 8px 0;padding:10px 14px;margin:10px 0;font-size:13px;color:#a8c8e8;line-height:1.6;}
+.modal-nav{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid rgba(74,158,218,0.15);}
+.step-dots{display:flex;gap:6px;}
+.step-dot{width:8px;height:8px;border-radius:50%;background:rgba(74,158,218,0.2);border:1px solid rgba(74,158,218,0.3);cursor:pointer;transition:all 0.2s;}
+.step-dot.active{background:#4a9eda;border-color:#4a9eda;}
 </style>
 </head>
 <body>
@@ -225,7 +86,7 @@ input[type="range"] { width: 100%; accent-color: #4a9eda; cursor: pointer; }
 <div class="main-layout">
   <div class="canvas-container">
     <div class="canvas-toolbar">
-      <button class="btn btn-secondary active" id="btnDrag" onclick="setMode('drag')">✋ Drag Vertices</button>
+      <button class="btn btn-secondary active" id="btnDrag">✋ Drag Vertices</button>
       <button class="btn btn-success" onclick="resetAll()">↺ Reset</button>
       <button class="btn btn-screenshot" onclick="takeScreenshot()">📸 Screenshot</button>
       <button class="btn btn-lesson" onclick="openLesson()">📖 Guided Lesson</button>
@@ -251,7 +112,7 @@ input[type="range"] { width: 100%; accent-color: #4a9eda; cursor: pointer; }
         </div>
         <div class="input-group">
           <div class="input-label">Angle C (°)</div>
-          <input class="input-field" id="t1AngleC" value="60" readonly style="opacity:0.6" class="input-field">
+          <input class="input-field" id="t1AngleC" value="60.0" readonly style="opacity:0.6">
         </div>
         <div class="input-group">
           <div class="input-label">Scale (px)</div>
@@ -271,15 +132,15 @@ input[type="range"] { width: 100%; accent-color: #4a9eda; cursor: pointer; }
         <tr><th></th><th>△1</th><th>△2</th><th>Match</th></tr>
         <tr>
           <td><span class="angle-dot" style="background:#f4a44a"></span>A↔D</td>
-          <td id="d1A">50°</td><td id="d2A">—</td><td id="mA">—</td>
+          <td id="d1A">50.0°</td><td id="d2A">—</td><td id="mA">—</td>
         </tr>
         <tr>
           <td><span class="angle-dot" style="background:#2ab878"></span>B↔E</td>
-          <td id="d1B">70°</td><td id="d2B">—</td><td id="mB">—</td>
+          <td id="d1B">70.0°</td><td id="d2B">—</td><td id="mB">—</td>
         </tr>
         <tr>
           <td><span class="angle-dot" style="background:#c75a8a"></span>C↔F</td>
-          <td id="d1C">60°</td><td id="d2C">—</td><td id="mC">—</td>
+          <td id="d1C">60.0°</td><td id="d2C">—</td><td id="mC">—</td>
         </tr>
       </table>
     </div>
@@ -329,8 +190,8 @@ input[type="range"] { width: 100%; accent-color: #4a9eda; cursor: pointer; }
     <div class="lesson-step" id="ls2">
       <div class="step-indicator">Step 2 of 7</div>
       <div class="step-title">Setting Up Triangle 1</div>
-      <div class="step-body">Look at the <strong>blue panel</strong> labeled "Triangle 1 — Reference."<br><br>• Enter values for <strong>Angle A</strong> and <strong>Angle B</strong><br>• <strong>Angle C</strong> calculates automatically — all angles must sum to <strong>180°</strong><br>• Adjust <strong>Scale</strong> to change the overall size<br><br>Triangle 1 stays fixed so you always have a reference to compare against.</div>
-      <div class="step-highlight">🔑 Triangle Angle Sum Theorem: The three interior angles of ANY triangle always sum to exactly 180°. This is always true, no exceptions!</div>
+      <div class="step-body">Look at the <strong>blue panel</strong> labeled "Triangle 1 — Reference."<br><br>• Enter values for <strong>Angle A</strong> and <strong>Angle B</strong><br>• <strong>Angle C</strong> calculates automatically — all angles must sum to <strong>180°</strong><br>• Adjust <strong>Scale</strong> to change the overall size<br><br>Triangle 1 stays fixed as your reference for comparison.</div>
+      <div class="step-highlight">🔑 Triangle Angle Sum Theorem: The three interior angles of ANY triangle always sum to exactly 180°.</div>
     </div>
     <div class="lesson-step" id="ls3">
       <div class="step-indicator">Step 3 of 7</div>
@@ -341,26 +202,26 @@ input[type="range"] { width: 100%; accent-color: #4a9eda; cursor: pointer; }
     <div class="lesson-step" id="ls4">
       <div class="step-indicator">Step 4 of 7</div>
       <div class="step-title">The AA Similarity Postulate</div>
-      <div class="step-body">The <strong>Angle-Angle (AA) Similarity Postulate</strong> states:<br><br><em>If two angles of one triangle are congruent to two angles of another triangle, then the triangles are similar.</em><br><br>Why does only two angles suffice? Because if two pairs match, the third pair MUST also match — since all angles sum to 180°!</div>
-      <div class="step-highlight">🎯 Try it: Drag Triangle 2 until angle D ≈ angle A AND angle E ≈ angle B. Notice that angle F automatically equals angle C, AND all three side ratios become equal at the same time!</div>
+      <div class="step-body">The <strong>Angle-Angle (AA) Similarity Postulate</strong> states:<br><br><em>If two angles of one triangle are congruent to two angles of another triangle, then the triangles are similar.</em><br><br>Why does only two angles suffice? Because if two pairs match, the third MUST also match since all angles sum to 180°!</div>
+      <div class="step-highlight">🎯 Try it: Drag Triangle 2 until angle D ≈ angle A AND angle E ≈ angle B. Notice angle F automatically equals angle C, AND all three side ratios become equal simultaneously!</div>
     </div>
     <div class="lesson-step" id="ls5">
       <div class="step-indicator">Step 5 of 7</div>
       <div class="step-title">Proportional Side Ratios</div>
       <div class="step-body">When triangles are truly similar, look at the <strong>Side Ratios panel</strong>:<br><br>• <strong>AB/DE</strong>, <strong>BC/EF</strong>, and <strong>CA/FD</strong> will ALL be equal<br>• This common ratio is the <strong>scale factor</strong><br>• If ANY ratio differs, the triangles are NOT similar</div>
-      <div class="step-highlight">📏 Key insight: Matching angles and proportional sides always occur TOGETHER in similar triangles. You cannot have one without the other — that is what makes similarity such a powerful relationship!</div>
+      <div class="step-highlight">📏 Key insight: Matching angles and proportional sides ALWAYS occur together in similar triangles. You cannot have one without the other!</div>
     </div>
     <div class="lesson-step" id="ls6">
       <div class="step-indicator">Step 6 of 7</div>
       <div class="step-title">Similarity Transformations</div>
-      <div class="step-body">Similarity is <strong>preserved</strong> through these transformations:<br><br>• <strong>Dilation</strong> — resizing changes size but NOT shape<br>• <strong>Rotation</strong> — spinning any number of degrees<br>• <strong>Reflection</strong> — flipping horizontally or vertically<br><br>No matter how you transform Triangle 2, similarity is maintained!</div>
-      <div class="step-highlight">🔄 Try it: First make the triangles similar by dragging vertices. Then use the Transformations panel to rotate, dilate, and reflect Triangle 2. The ✅ Similar status remains throughout all transformations!</div>
+      <div class="step-body">Similarity is <strong>preserved</strong> through these transformations:<br><br>• <strong>Dilation</strong> — resizing changes size but NOT shape<br>• <strong>Rotation</strong> — spinning any number of degrees<br>• <strong>Reflection</strong> — flipping horizontally or vertically</div>
+      <div class="step-highlight">🔄 Try it: First make the triangles similar by dragging. Then use the Transformations panel to rotate, dilate, and reflect Triangle 2. The ✅ Similar status remains throughout!</div>
     </div>
     <div class="lesson-step" id="ls7">
       <div class="step-indicator">Step 7 of 7</div>
       <div class="step-title">SSS and SAS Similarity</div>
       <div class="step-body">Two more ways to prove similarity:<br><br>• <strong>SSS Similarity:</strong> All three pairs of corresponding sides are proportional<br><br>• <strong>SAS Similarity:</strong> Two pairs of corresponding sides are proportional AND the included angle between those sides is congruent</div>
-      <div class="step-highlight">🏆 You now know all three similarity postulates: <strong>AA, SSS, and SAS</strong>. The postulate badge updates automatically. Notice that when AA is satisfied, SSS is always satisfied too — they are two descriptions of the same geometric truth!</div>
+      <div class="step-highlight">🏆 You now know all three similarity postulates: <strong>AA, SSS, and SAS</strong>. The postulate badge updates automatically to show which one applies!</div>
     </div>
     <div class="modal-nav">
       <button class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)">← Prev</button>
@@ -373,386 +234,351 @@ input[type="range"] { width: 100%; accent-color: #4a9eda; cursor: pointer; }
 <script>
 const canvas = document.getElementById('mainCanvas');
 const ctx = canvas.getContext('2d');
-let mode = 'drag';
 let dragging = null;
 let currentStep = 1;
 const TOTAL_STEPS = 7;
 let reflectH = false, reflectV = false;
 let rotationDeg = 0, dilationFactor = 1.0;
+const ANGLE_TOL = 2;
+const RATIO_TOL = 0.04;
 
-// Strict tolerances — mathematically rigorous
-const ANGLE_TOL = 2;    // degrees
-const RATIO_TOL = 0.03; // 3% proportionality tolerance
+let t1 = { A:{x:80,y:450}, B:{x:280,y:450}, C:{x:160,y:220}, aA:50, aB:70, aC:60 };
+let t2base = { A:{x:420,y:450}, B:{x:640,y:450}, C:{x:510,y:210} };
+let t2 = { A:{x:420,y:450}, B:{x:640,y:450}, C:{x:510,y:210} };
 
-// Triangle 1 state
-let t1 = {
-  A:{x:80,y:450}, B:{x:280,y:450}, C:{x:160,y:220},
-  aA:50, aB:70, aC:60
-};
+function dist(p,q){ return Math.sqrt((q.x-p.x)**2+(q.y-p.y)**2); }
 
-// Triangle 2 base positions (before transforms)
-let t2base = { A:{x:420,y:450}, B:{x:660,y:450}, C:{x:530,y:200} };
-// Triangle 2 actual drawn positions
-let t2 = { A:{x:420,y:450}, B:{x:660,y:450}, C:{x:530,y:200} };
-
-// ==============================
-// MATH HELPERS
-// ==============================
-function dist(p, q) {
-  return Math.sqrt((q.x - p.x) ** 2 + (q.y - p.y) ** 2);
+function angleDeg(p1,vertex,p2){
+  const v1={x:p1.x-vertex.x,y:p1.y-vertex.y};
+  const v2={x:p2.x-vertex.x,y:p2.y-vertex.y};
+  const dot=v1.x*v2.x+v1.y*v2.y;
+  const mag=Math.sqrt(v1.x**2+v1.y**2)*Math.sqrt(v2.x**2+v2.y**2);
+  if(mag<0.001) return 0;
+  return Math.acos(Math.max(-1,Math.min(1,dot/mag)))*180/Math.PI;
 }
 
-function angleDeg(p1, vertex, p2) {
-  const v1 = { x: p1.x - vertex.x, y: p1.y - vertex.y };
-  const v2 = { x: p2.x - vertex.x, y: p2.y - vertex.y };
-  const dot = v1.x * v2.x + v1.y * v2.y;
-  const mag = Math.sqrt(v1.x ** 2 + v1.y ** 2) * Math.sqrt(v2.x ** 2 + v2.y ** 2);
-  if (mag < 0.001) return 0;
-  return Math.acos(Math.max(-1, Math.min(1, dot / mag))) * 180 / Math.PI;
+function centroid(t){ return {x:(t.A.x+t.B.x+t.C.x)/3,y:(t.A.y+t.B.y+t.C.y)/3}; }
+
+function rotatePoint(p,cx,cy,deg){
+  const r=deg*Math.PI/180;
+  const dx=p.x-cx, dy=p.y-cy;
+  return {x:cx+dx*Math.cos(r)-dy*Math.sin(r), y:cy+dx*Math.sin(r)+dy*Math.cos(r)};
 }
 
-function centroid(t) {
-  return { x: (t.A.x + t.B.x + t.C.x) / 3, y: (t.A.y + t.B.y + t.C.y) / 3 };
-}
-
-function rotatePoint(p, cx, cy, deg) {
-  const r = deg * Math.PI / 180;
-  const dx = p.x - cx, dy = p.y - cy;
+function getMouse(e){
+  const rect=canvas.getBoundingClientRect();
   return {
-    x: cx + dx * Math.cos(r) - dy * Math.sin(r),
-    y: cy + dx * Math.sin(r) + dy * Math.cos(r)
+    mx:(e.clientX-rect.left)*(canvas.width/rect.width),
+    my:(e.clientY-rect.top)*(canvas.height/rect.height)
   };
 }
 
-function getMouse(e) {
-  const rect = canvas.getBoundingClientRect();
+function getT2Angles(){
   return {
-    mx: (e.clientX - rect.left) * (canvas.width / rect.width),
-    my: (e.clientY - rect.top) * (canvas.height / rect.height)
+    A:angleDeg(t2.B,t2.A,t2.C),
+    B:angleDeg(t2.A,t2.B,t2.C),
+    C:angleDeg(t2.A,t2.C,t2.B)
   };
 }
 
-// ==============================
-// GET ANGLES
-// ==============================
-function getT2Angles() {
-  return {
-    A: angleDeg(t2.B, t2.A, t2.C),
-    B: angleDeg(t2.A, t2.B, t2.C),
-    C: angleDeg(t2.A, t2.C, t2.B)
-  };
-}
+function checkSimilarity(){
+  const a2=getT2Angles();
+  const AB1=dist(t1.A,t1.B), BC1=dist(t1.B,t1.C), CA1=dist(t1.C,t1.A);
+  const DE2=dist(t2.A,t2.B), EF2=dist(t2.B,t2.C), FD2=dist(t2.C,t2.A);
+  const rAB=DE2/AB1, rBC=EF2/BC1, rCA=FD2/CA1;
+  const avgRatio=(rAB+rBC+rCA)/3;
+  const sidesProp=avgRatio>0 &&
+    Math.abs(rAB-avgRatio)/avgRatio<=RATIO_TOL &&
+    Math.abs(rBC-avgRatio)/avgRatio<=RATIO_TOL &&
+    Math.abs(rCA-avgRatio)/avgRatio<=RATIO_TOL;
 
-// ==============================
-// RIGOROUS SIMILARITY CHECK
-// ==============================
-function checkSimilarity() {
-  const a2 = getT2Angles();
-
-  // Side lengths
-  const AB1 = dist(t1.A, t1.B);
-  const BC1 = dist(t1.B, t1.C);
-  const CA1 = dist(t1.C, t1.A);
-  const DE2 = dist(t2.A, t2.B);
-  const EF2 = dist(t2.B, t2.C);
-  const FD2 = dist(t2.C, t2.A);
-
-  const rAB = DE2 / AB1;
-  const rBC = EF2 / BC1;
-  const rCA = FD2 / CA1;
-  const avgRatio = (rAB + rBC + rCA) / 3;
-
-  // Check all side ratios are proportional (within RATIO_TOL of each other)
-  const sidesProp = avgRatio > 0 &&
-    Math.abs(rAB - avgRatio) / avgRatio <= RATIO_TOL &&
-    Math.abs(rBC - avgRatio) / avgRatio <= RATIO_TOL &&
-    Math.abs(rCA - avgRatio) / avgRatio <= RATIO_TOL;
-
-  // Try all 6 permutations of T2 angles vs T1 angles to find best match
-  const t1arr = [t1.aA, t1.aB, t1.aC];
-  const t2arr = [a2.A, a2.B, a2.C];
-  const perms = [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
-
-  let bestCount = 0;
-  let bestPerm = [0,1,2];
-  for (const p of perms) {
-    let count = 0;
-    for (let i = 0; i < 3; i++) {
-      if (Math.abs(t1arr[i] - t2arr[p[i]]) <= ANGLE_TOL) count++;
-    }
-    if (count > bestCount) { bestCount = count; bestPerm = p; }
+  const t1arr=[t1.aA,t1.aB,t1.aC];
+  const t2arr=[a2.A,a2.B,a2.C];
+  const perms=[[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
+  let bestCount=0, bestPerm=[0,1,2];
+  for(const p of perms){
+    let count=0;
+    for(let i=0;i<3;i++) if(Math.abs(t1arr[i]-t2arr[p[i]])<=ANGLE_TOL) count++;
+    if(count>bestCount){bestCount=count;bestPerm=p;}
   }
 
-  // Individual angle match results using best permutation
-  const matchA = Math.abs(t1arr[0] - t2arr[bestPerm[0]]) <= ANGLE_TOL;
-  const matchB = Math.abs(t1arr[1] - t2arr[bestPerm[1]]) <= ANGLE_TOL;
-  const matchC = Math.abs(t1arr[2] - t2arr[bestPerm[2]]) <= ANGLE_TOL;
+  const matchA=Math.abs(t1arr[0]-t2arr[bestPerm[0]])<=ANGLE_TOL;
+  const matchB=Math.abs(t1arr[1]-t2arr[bestPerm[1]])<=ANGLE_TOL;
+  const matchC=Math.abs(t1arr[2]-t2arr[bestPerm[2]])<=ANGLE_TOL;
 
-  // AA: at least 2 angle pairs match AND sides must also be proportional
-  const aaOK = bestCount >= 2 && sidesProp;
-  // SSS: all side ratios proportional
-  const sssOK = sidesProp && bestCount < 2;
-  // SAS: 2 sides proportional + included angle
-  const sasOK = !aaOK && !sssOK && (
-    (Math.abs(rAB - rBC) / avgRatio <= RATIO_TOL && matchB) ||
-    (Math.abs(rBC - rCA) / avgRatio <= RATIO_TOL && matchC) ||
-    (Math.abs(rCA - rAB) / avgRatio <= RATIO_TOL && matchA)
-  );
+  let similar=false, postulate='';
+  if(bestCount>=2 && sidesProp){ similar=true; postulate='AA Similarity'; }
+  else if(sidesProp){ similar=true; postulate='SSS Similarity'; }
 
-  let similar = aaOK || sssOK || sasOK;
-  let postulate = aaOK ? 'AA Similarity' : sssOK ? 'SSS Similarity' : sasOK ? 'SAS Similarity' : '';
-
-  return { similar, postulate, a2, matchA, matchB, matchC, rAB, rBC, rCA, avgRatio, sidesProp };
+  return {similar,postulate,a2,matchA,matchB,matchC,rAB,rBC,rCA,avgRatio,sidesProp};
 }
 
-// ==============================
-// UPDATE PANEL
-// ==============================
-function updatePanel() {
-  const { similar, postulate, a2, matchA, matchB, matchC, rAB, rBC, rCA, avgRatio, sidesProp } = checkSimilarity();
-
-  const statusEl = document.getElementById('simStatus');
-  statusEl.className = 'similarity-status ' + (similar ? 'status-similar' : 'status-not-similar');
-  document.getElementById('simIcon').textContent = similar ? '✅' : '❌';
-  document.getElementById('simText').textContent = similar ? 'SIMILAR' : 'NOT SIMILAR';
-  const badge = document.getElementById('simPostulate');
-  badge.textContent = postulate;
-  badge.style.display = postulate ? 'inline-block' : 'none';
-
-  // Angle table
-  document.getElementById('d2A').textContent = a2.A.toFixed(1) + '°';
-  document.getElementById('d2B').textContent = a2.B.toFixed(1) + '°';
-  document.getElementById('d2C').textContent = a2.C.toFixed(1) + '°';
-  document.getElementById('mA').textContent = matchA ? '✅' : '❌';
-  document.getElementById('mB').textContent = matchB ? '✅' : '❌';
-  document.getElementById('mC').textContent = matchC ? '✅' : '❌';
-
-  // Side ratios — green when proportional
-  const els = ['rAB','rBC','rCA'];
-  const vals = [rAB, rBC, rCA];
-  els.forEach((id, i) => {
-    const el = document.getElementById(id);
-    el.textContent = vals[i].toFixed(3);
-    el.style.color = sidesProp ? '#2ab878' : '#e8ecf1';
-  });
-
-  const scaleEl = document.getElementById('rScale');
-  scaleEl.textContent = sidesProp ? avgRatio.toFixed(3) + '×' : 'Not proportional';
-  scaleEl.style.color = sidesProp ? '#4a9eda' : '#e05a5a';
-
-  const note = document.getElementById('ratioNote');
-  if (sidesProp) {
-    note.textContent = '✅ All ratios equal — sides are proportional';
-    note.style.color = '#2ab878';
+function updatePanel(){
+  const {similar,postulate,a2,matchA,matchB,matchC,rAB,rBC,rCA,avgRatio,sidesProp}=checkSimilarity();
+  const statusEl=document.getElementById('simStatus');
+  statusEl.className='similarity-status '+(similar?'status-similar':'status-not-similar');
+  document.getElementById('simIcon').textContent=similar?'✅':'❌';
+  document.getElementById('simText').textContent=similar?'SIMILAR':'NOT SIMILAR';
+  const badge=document.getElementById('simPostulate');
+  badge.textContent=postulate;
+  badge.style.display=postulate?'inline-block':'none';
+  document.getElementById('d2A').textContent=a2.A.toFixed(1)+'°';
+  document.getElementById('d2B').textContent=a2.B.toFixed(1)+'°';
+  document.getElementById('d2C').textContent=a2.C.toFixed(1)+'°';
+  document.getElementById('mA').textContent=matchA?'✅':'❌';
+  document.getElementById('mB').textContent=matchB?'✅':'❌';
+  document.getElementById('mC').textContent=matchC?'✅':'❌';
+  const rABel=document.getElementById('rAB');
+  const rBCel=document.getElementById('rBC');
+  const rCAel=document.getElementById('rCA');
+  rABel.textContent=rAB.toFixed(3);
+  rBCel.textContent=rBC.toFixed(3);
+  rCAel.textContent=rCA.toFixed(3);
+  rABel.style.color=sidesProp?'#2ab878':'#e8ecf1';
+  rBCel.style.color=sidesProp?'#2ab878':'#e8ecf1';
+  rCAel.style.color=sidesProp?'#2ab878':'#e8ecf1';
+  const scaleEl=document.getElementById('rScale');
+  scaleEl.textContent=sidesProp?avgRatio.toFixed(3)+'×':'Not proportional';
+  scaleEl.style.color=sidesProp?'#4a9eda':'#e05a5a';
+  const note=document.getElementById('ratioNote');
+  if(sidesProp){
+    note.textContent='✅ All ratios equal — sides are proportional';
+    note.style.color='#2ab878';
   } else {
-    const spread = (Math.max(rAB, rBC, rCA) - Math.min(rAB, rBC, rCA)).toFixed(3);
-    note.textContent = 'Ratio spread: ' + spread + ' (need < 0.030 for proportional)';
-    note.style.color = '#e05a5a';
+    const spread=(Math.max(rAB,rBC,rCA)-Math.min(rAB,rBC,rCA)).toFixed(3);
+    note.textContent='Ratio spread: '+spread+' (need < 0.040)';
+    note.style.color='#e05a5a';
   }
 }
 
-// ==============================
-// BUILD TRIANGLE 1 FROM INPUTS
-// ==============================
-function updateTriangle1() {
-  const aA = parseFloat(document.getElementById('t1AngleA').value) || 50;
-  const aB = parseFloat(document.getElementById('t1AngleB').value) || 70;
-  const aC = 180 - aA - aB;
-  if (aC <= 1 || aA <= 1 || aB <= 1) return;
-
-  document.getElementById('t1AngleC').value = aC.toFixed(1);
-  t1.aA = aA; t1.aB = aB; t1.aC = aC;
-
-  const scale = parseFloat(document.getElementById('t1Scale').value) || 150;
-  const aARad = aA * Math.PI / 180;
-  const aBRad = aB * Math.PI / 180;
-  const aCRad = aC * Math.PI / 180;
-  const sideC = scale;
-  const sideB = sideC * Math.sin(aBRad) / Math.sin(aCRad);
-
-  t1.A = { x: 80, y: 450 };
-  t1.B = { x: 80 + sideC, y: 450 };
-  t1.C = { x: 80 + sideB * Math.cos(aARad), y: 450 - sideB * Math.sin(aARad) };
-
-  document.getElementById('d1A').textContent = aA.toFixed(1) + '°';
-  document.getElementById('d1B').textContent = aB.toFixed(1) + '°';
-  document.getElementById('d1C').textContent = aC.toFixed(1) + '°';
-
+function updateTriangle1(){
+  const aA=parseFloat(document.getElementById('t1AngleA').value)||50;
+  const aB=parseFloat(document.getElementById('t1AngleB').value)||70;
+  const aC=180-aA-aB;
+  if(aC<=1||aA<=1||aB<=1) return;
+  document.getElementById('t1AngleC').value=aC.toFixed(1);
+  t1.aA=aA; t1.aB=aB; t1.aC=aC;
+  const scale=parseFloat(document.getElementById('t1Scale').value)||150;
+  const aARad=aA*Math.PI/180;
+  const aBRad=aB*Math.PI/180;
+  const aCRad=aC*Math.PI/180;
+  const sideC=scale;
+  const sideB=sideC*Math.sin(aBRad)/Math.sin(aCRad);
+  t1.A={x:80,y:450};
+  t1.B={x:80+sideC,y:450};
+  t1.C={x:80+sideB*Math.cos(aARad),y:450-sideB*Math.sin(aARad)};
+  document.getElementById('d1A').textContent=aA.toFixed(1)+'°';
+  document.getElementById('d1B').textContent=aB.toFixed(1)+'°';
+  document.getElementById('d1C').textContent=aC.toFixed(1)+'°';
   redraw();
   updatePanel();
 }
 
-// ==============================
-// DRAW
-// ==============================
-function redraw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+function redraw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
   drawGrid();
-  const a2 = getT2Angles();
-  drawTriangle(t1, '#4a9eda', false, t1.aA.toFixed(1), t1.aB.toFixed(1), t1.aC.toFixed(1), 'A', 'B', 'C');
-  drawTriangle(t2, '#e07aaa', true, a2.A.toFixed(1), a2.B.toFixed(1), a2.C.toFixed(1), 'D', 'E', 'F');
+  const a2=getT2Angles();
+  drawTriangle(t1,'#4a9eda',false,t1.aA.toFixed(1),t1.aB.toFixed(1),t1.aC.toFixed(1),'A','B','C');
+  drawTriangle(t2,'#e07aaa',true,a2.A.toFixed(1),a2.B.toFixed(1),a2.C.toFixed(1),'D','E','F');
 }
 
-function drawGrid() {
-  ctx.strokeStyle = 'rgba(74,158,218,0.05)';
-  ctx.lineWidth = 1;
-  for (let x = 0; x < canvas.width; x += 40) {
-    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
-  }
-  for (let y = 0; y < canvas.height; y += 40) {
-    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
-  }
+function drawGrid(){
+  ctx.strokeStyle='rgba(74,158,218,0.05)';
+  ctx.lineWidth=1;
+  for(let x=0;x<canvas.width;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke();}
+  for(let y=0;y<canvas.height;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke();}
 }
 
-function drawTriangle(t, color, draggable, aA, aB, aC, lA, lB, lC) {
+function drawTriangle(t,color,draggable,aA,aB,aC,lA,lB,lC){
   ctx.beginPath();
-  ctx.moveTo(t.A.x, t.A.y);
-  ctx.lineTo(t.B.x, t.B.y);
-  ctx.lineTo(t.C.x, t.C.y);
+  ctx.moveTo(t.A.x,t.A.y);
+  ctx.lineTo(t.B.x,t.B.y);
+  ctx.lineTo(t.C.x,t.C.y);
   ctx.closePath();
-  ctx.fillStyle = color + '15';
+  ctx.fillStyle=color+'15';
   ctx.fill();
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 2.5;
+  ctx.strokeStyle=color;
+  ctx.lineWidth=2.5;
   ctx.stroke();
-
-  drawArc(t.B, t.A, t.C, '#f4a44a', aA + '°');
-  drawArc(t.A, t.B, t.C, '#2ab878', aB + '°');
-  drawArc(t.A, t.C, t.B, '#c75a8a', aC + '°');
-
-  labelSide(t.A, t.B, color);
-  labelSide(t.B, t.C, color);
-  labelSide(t.C, t.A, color);
-
-  labelVertex(t.A, color, lA, draggable);
-  labelVertex(t.B, color, lB, draggable);
-  labelVertex(t.C, color, lC, draggable);
+  drawArc(t.B,t.A,t.C,'#f4a44a',aA+'°');
+  drawArc(t.A,t.B,t.C,'#2ab878',aB+'°');
+  drawArc(t.A,t.C,t.B,'#c75a8a',aC+'°');
+  labelSide(t.A,t.B,color);
+  labelSide(t.B,t.C,color);
+  labelSide(t.C,t.A,color);
+  labelVertex(t.A,color,lA,draggable);
+  labelVertex(t.B,color,lB,draggable);
+  labelVertex(t.C,color,lC,draggable);
 }
 
-function drawArc(p1, vertex, p2, color, label) {
-  const v1 = { x: p1.x - vertex.x, y: p1.y - vertex.y };
-  const v2 = { x: p2.x - vertex.x, y: p2.y - vertex.y };
-  const a1 = Math.atan2(v1.y, v1.x);
-  const a2 = Math.atan2(v2.y, v2.x);
+function drawArc(p1,vertex,p2,color,label){
+  const v1={x:p1.x-vertex.x,y:p1.y-vertex.y};
+  const v2={x:p2.x-vertex.x,y:p2.y-vertex.y};
+  const a1=Math.atan2(v1.y,v1.x);
+  const a2=Math.atan2(v2.y,v2.x);
   ctx.beginPath();
-  ctx.arc(vertex.x, vertex.y, 20, a1, a2);
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 2;
+  ctx.arc(vertex.x,vertex.y,20,a1,a2);
+  ctx.strokeStyle=color;
+  ctx.lineWidth=2;
   ctx.stroke();
-  const mid = (a1 + a2) / 2;
-  ctx.fillStyle = color;
-  ctx.font = 'bold 10px Jost,sans-serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(label, vertex.x + 34 * Math.cos(mid), vertex.y + 34 * Math.sin(mid));
+  const mid=(a1+a2)/2;
+  ctx.fillStyle=color;
+  ctx.font='bold 10px Jost,sans-serif';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText(label,vertex.x+34*Math.cos(mid),vertex.y+34*Math.sin(mid));
 }
 
-function labelSide(p1, p2, color) {
-  const mx = (p1.x + p2.x) / 2;
-  const my = (p1.y + p2.y) / 2;
-  const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
-  const ox = -Math.sin(angle) * 10;
-  const oy = Math.cos(angle) * 10;
-  ctx.fillStyle = color + 'bb';
-  ctx.font = '500 10px Jost,sans-serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(dist(p1, p2).toFixed(1), mx + ox, my + oy);
+function labelSide(p1,p2,color){
+  const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+  const angle=Math.atan2(p2.y-p1.y,p2.x-p1.x);
+  const ox=-Math.sin(angle)*10, oy=Math.cos(angle)*10;
+  ctx.fillStyle=color+'bb';
+  ctx.font='500 10px Jost,sans-serif';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText(dist(p1,p2).toFixed(1),mx+ox,my+oy);
 }
 
-function labelVertex(p, color, label, draggable) {
-  const r = draggable ? 9 : 5;
+function labelVertex(p,color,label,draggable){
+  const r=draggable?9:5;
   ctx.beginPath();
-  ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-  ctx.fillStyle = color;
+  ctx.arc(p.x,p.y,r,0,Math.PI*2);
+  ctx.fillStyle=color;
   ctx.fill();
-  if (draggable) { ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke(); }
-  ctx.fillStyle = '#fff';
-  ctx.font = 'bold 12px Jost,sans-serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'bottom';
-  ctx.fillText(label, p.x, p.y - 12);
+  if(draggable){ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();}
+  ctx.fillStyle='#fff';
+  ctx.font='bold 12px Jost,sans-serif';
+  ctx.textAlign='center';
+  ctx.textBaseline='bottom';
+  ctx.fillText(label,p.x,p.y-12);
 }
 
-// ==============================
-// DRAG
-// ==============================
-canvas.addEventListener('mousedown', e => {
-  const { mx, my } = getMouse(e);
-  for (const key of ['A', 'B', 'C']) {
-    if (dist({ x: mx, y: my }, t2[key]) < 18) { dragging = key; break; }
+canvas.addEventListener('mousedown',e=>{
+  const {mx,my}=getMouse(e);
+  for(const key of ['A','B','C']){
+    if(dist({x:mx,y:my},t2[key])<18){dragging=key;break;}
   }
 });
 
-canvas.addEventListener('mousemove', e => {
-  const { mx, my } = getMouse(e);
-  if (dragging) {
-    t2[dragging] = { x: mx, y: my };
-    t2base[dragging] = { x: mx, y: my };
+canvas.addEventListener('mousemove',e=>{
+  const {mx,my}=getMouse(e);
+  if(dragging){
+    t2[dragging]={x:mx,y:my};
+    t2base[dragging]={x:mx,y:my};
     redraw();
     updatePanel();
   }
-  let hover = false;
-  for (const key of ['A', 'B', 'C']) {
-    if (dist({ x: mx, y: my }, t2[key]) < 18) { hover = true; break; }
+  let hover=false;
+  for(const key of ['A','B','C']){
+    if(dist({x:mx,y:my},t2[key])<18){hover=true;break;}
   }
-  canvas.style.cursor = hover ? 'grab' : 'crosshair';
+  canvas.style.cursor=hover?'grab':'crosshair';
 });
 
-canvas.addEventListener('mouseup', () => { dragging = null; });
-canvas.addEventListener('mouseleave', () => { dragging = null; });
+canvas.addEventListener('mouseup',()=>{dragging=null;});
+canvas.addEventListener('mouseleave',()=>{dragging=null;});
 
-// ==============================
-// MODE
-// ==============================
-function setMode(m) {
-  mode = m;
-  document.getElementById('btnDrag').classList.toggle('active', m === 'drag');
-}
-
-// ==============================
-// TRANSFORMATIONS
-// ==============================
-function applyTransforms() {
-  const c = centroid(t2base);
-  for (const key of ['A', 'B', 'C']) {
-    let p = { ...t2base[key] };
-    p = { x: c.x + (p.x - c.x) * dilationFactor, y: c.y + (p.y - c.y) * dilationFactor };
-    if (reflectH) p = { x: 2 * c.x - p.x, y: p.y };
-    if (reflectV) p = { x: p.x, y: 2 * c.y - p.y };
-    p = rotatePoint(p, c.x, c.y, rotationDeg);
-    t2[key] = p;
+function applyTransforms(){
+  const c=centroid(t2base);
+  for(const key of ['A','B','C']){
+    let p={...t2base[key]};
+    p={x:c.x+(p.x-c.x)*dilationFactor,y:c.y+(p.y-c.y)*dilationFactor};
+    if(reflectH) p={x:2*c.x-p.x,y:p.y};
+    if(reflectV) p={x:p.x,y:2*c.y-p.y};
+    p=rotatePoint(p,c.x,c.y,rotationDeg);
+    t2[key]=p;
   }
   redraw();
   updatePanel();
 }
 
-function toggleReflectH() {
-  reflectH = !reflectH;
-  document.getElementById('btnRH').classList.toggle('active', reflectH);
+function toggleReflectH(){
+  reflectH=!reflectH;
+  document.getElementById('btnRH').classList.toggle('active',reflectH);
   applyTransforms();
 }
 
-function toggleReflectV() {
-  reflectV = !reflectV;
-  document.getElementById('btnRV').classList.toggle('active', reflectV);
+function toggleReflectV(){
+  reflectV=!reflectV;
+  document.getElementById('btnRV').classList.toggle('active',reflectV);
   applyTransforms();
 }
 
-function setRotation(v) {
-  rotationDeg = parseFloat(v);
-  document.getElementById('rotVal').textContent = v + '°';
+function setRotation(v){
+  rotationDeg=parseFloat(v);
+  document.getElementById('rotVal').textContent=v+'°';
   applyTransforms();
 }
 
-function setDilation(v) {
-  dilationFactor = parseFloat(v) / 100;
-  document.getElementById('dilVal').textContent = dilationFactor.toFixed(2) + '×';
+function setDilation(v){
+  dilationFactor=parseFloat(v)/100;
+  document.getElementById('dilVal').textContent=dilationFactor.toFixed(2)+'×';
   applyTransforms();
 }
 
-// ==============================
-// RESET
-// ==============================
-function resetAll() {
-  t2base = { A:{x:420,y:450
+function resetAll(){
+  t2base={A:{x:420,y:450},B:{x:640,y:450},C:{x:510,y:210}};
+  t2={A:{x:420,y:450},B:{x:640,y:450},C:{x:510,y:210}};
+  reflectH=false; reflectV=false; rotationDeg=0; dilationFactor=1.0;
+  document.getElementById('rotSlider').value=0;
+  document.getElementById('dilSlider').value=100;
+  document.getElementById('rotVal').textContent='0°';
+  document.getElementById('dilVal').textContent='1.00×';
+  document.getElementById('btnRH').classList.remove('active');
+  document.getElementById('btnRV').classList.remove('active');
+  document.getElementById('t1AngleA').value=50;
+  document.getElementById('t1AngleB').value=70;
+  document.getElementById('t1Scale').value=150;
+  updateTriangle1();
+}
+
+function takeScreenshot(){
+  redraw();
+  const link=document.createElement('a');
+  link.download='similar-triangles-jerrys-geometry.png';
+  link.href=canvas.toDataURL('image/png');
+  link.click();
+}
+
+function buildDots(){
+  const container=document.getElementById('stepDots');
+  container.innerHTML='';
+  for(let i=1;i<=TOTAL_STEPS;i++){
+    const d=document.createElement('div');
+    d.className='step-dot'+(i===currentStep?' active':'');
+    d.onclick=(()=>{const n=i;return()=>goToStep(n);})();
+    container.appendChild(d);
+  }
+}
+
+function goToStep(n){
+  document.getElementById('ls'+currentStep).classList.remove('active');
+  currentStep=n;
+  document.getElementById('ls'+currentStep).classList.add('active');
+  document.getElementById('prevBtn').style.visibility=currentStep===1?'hidden':'visible';
+  document.getElementById('nextBtn').textContent=currentStep===TOTAL_STEPS?'✓ Done':'Next →';
+  buildDots();
+}
+
+function changeStep(dir){
+  if(dir===1&&currentStep===TOTAL_STEPS){closeLesson();return;}
+  goToStep(Math.max(1,Math.min(TOTAL_STEPS,currentStep+dir)));
+}
+
+function openLesson(){
+  currentStep=1;
+  goToStep(1);
+  document.getElementById('lessonModal').classList.add('active');
+}
+
+function closeLesson(){
+  document.getElementById('lessonModal').classList.remove('active');
+}
+
+// INIT
+buildDots();
+updateTriangle1();
+</script>
+</body>
+</html>
