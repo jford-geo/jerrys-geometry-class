@@ -293,7 +293,7 @@ input[type="range"] { width: 100%; accent-color: #4a9eda; cursor: pointer; }
         <span class="ratio-label" style="color:#4a9eda;font-weight:700">Scale Factor</span>
         <span class="ratio-value" id="rScale" style="color:#4a9eda">—</span>
       </div>
-      <div id="ratioNote" style="margin-top:6px;font-size:10px;color:#5a7a9a;text-align:center"></div>
+      <div id="ratioNote" style="margin-top:6px;font-size:10px;text-align:center;color:#5a7a9a"></div>
     </div>
 
     <div class="panel-card">
@@ -323,44 +323,44 @@ input[type="range"] { width: 100%; accent-color: #4a9eda; cursor: pointer; }
     <div class="lesson-step active" id="ls1">
       <div class="step-indicator">Step 1 of 7</div>
       <div class="step-title">What Are Similar Triangles?</div>
-      <div class="step-body">Two triangles are <strong>similar</strong> when they have the same shape but are not necessarily the same size.<br><br>For two triangles to be similar, ALL of the following must be true:<br>• All three pairs of <strong>corresponding angles must be congruent</strong><br>• All three pairs of <strong>corresponding sides must be proportional</strong></div>
-      <div class="step-highlight">📐 We write similarity using the ~ symbol. Example: △ABC ~ △DEF means triangle ABC is similar to triangle DEF. The ORDER of the letters matters — it tells you which angles and sides correspond!</div>
+      <div class="step-body">Two triangles are <strong>similar</strong> when they have the same shape but not necessarily the same size.<br><br>For two triangles to be similar, ALL of the following must be true:<br>• All three pairs of <strong>corresponding angles must be congruent</strong><br>• All three pairs of <strong>corresponding sides must be proportional</strong></div>
+      <div class="step-highlight">📐 We write similarity using the ~ symbol. Example: △ABC ~ △DEF. The ORDER of letters matters — it identifies which angles and sides correspond to each other.</div>
     </div>
     <div class="lesson-step" id="ls2">
       <div class="step-indicator">Step 2 of 7</div>
       <div class="step-title">Setting Up Triangle 1</div>
-      <div class="step-body">Look at the <strong>blue panel</strong> labeled "Triangle 1 — Reference."<br><br>• Enter values for <strong>Angle A</strong> and <strong>Angle B</strong><br>• <strong>Angle C</strong> calculates automatically — all angles must sum to <strong>180°</strong><br>• Adjust <strong>Scale</strong> to change the size of Triangle 1<br><br>Triangle 1 stays fixed so you always have a reference to compare against.</div>
-      <div class="step-highlight">🔑 Triangle Angle Sum Theorem: The three interior angles of ANY triangle always sum to exactly 180°.</div>
+      <div class="step-body">Look at the <strong>blue panel</strong> labeled "Triangle 1 — Reference."<br><br>• Enter values for <strong>Angle A</strong> and <strong>Angle B</strong><br>• <strong>Angle C</strong> calculates automatically — all angles must sum to <strong>180°</strong><br>• Adjust <strong>Scale</strong> to change the overall size<br><br>Triangle 1 stays fixed so you always have a reference to compare against.</div>
+      <div class="step-highlight">🔑 Triangle Angle Sum Theorem: The three interior angles of ANY triangle always sum to exactly 180°. This is always true, no exceptions!</div>
     </div>
     <div class="lesson-step" id="ls3">
       <div class="step-indicator">Step 3 of 7</div>
       <div class="step-title">Dragging Triangle 2</div>
-      <div class="step-body">Triangle 2 is shown in <strong>pink</strong> on the canvas with vertices labeled D, E, and F.<br><br>• Click and drag any <strong>vertex (corner point)</strong> of Triangle 2<br>• Watch all three angle measurements update live<br>• The <strong>Similarity Status</strong> panel shows whether the triangles are currently similar</div>
-      <div class="step-highlight">👀 Notice: The similarity check is STRICT. ALL corresponding angles must match within 2° AND all side ratios must be within 3% of each other before the triangles are declared similar.</div>
+      <div class="step-body">Triangle 2 is shown in <strong>pink</strong> on the canvas with vertices D, E, and F.<br><br>• Click and drag any <strong>vertex</strong> of Triangle 2<br>• Watch all three angle measurements update live<br>• The <strong>Similarity Status</strong> shows whether the triangles are currently similar</div>
+      <div class="step-highlight">👀 The similarity check is STRICT — all corresponding angles must match within 2° AND all three side ratios must be within 3% of each other. This reflects true mathematical similarity!</div>
     </div>
     <div class="lesson-step" id="ls4">
       <div class="step-indicator">Step 4 of 7</div>
       <div class="step-title">The AA Similarity Postulate</div>
-      <div class="step-body">The <strong>Angle-Angle (AA) Similarity Postulate</strong> states:<br><br><em>If two angles of one triangle are congruent to two angles of another triangle, then the triangles are similar.</em><br><br>Why does only two angles work? Because if two pairs match, the third pair MUST also match — since all angles sum to 180°!</div>
-      <div class="step-highlight">🎯 Try it: Drag Triangle 2 until angle D matches angle A AND angle E matches angle B. Watch all three ratios in the Side Ratios panel become equal!</div>
+      <div class="step-body">The <strong>Angle-Angle (AA) Similarity Postulate</strong> states:<br><br><em>If two angles of one triangle are congruent to two angles of another triangle, then the triangles are similar.</em><br><br>Why does only two angles suffice? Because if two pairs match, the third pair MUST also match — since all angles sum to 180°!</div>
+      <div class="step-highlight">🎯 Try it: Drag Triangle 2 until angle D ≈ angle A AND angle E ≈ angle B. Notice that angle F automatically equals angle C, AND all three side ratios become equal at the same time!</div>
     </div>
     <div class="lesson-step" id="ls5">
       <div class="step-indicator">Step 5 of 7</div>
       <div class="step-title">Proportional Side Ratios</div>
-      <div class="step-body">When triangles are truly similar, look at the <strong>Side Ratios panel</strong>:<br><br>• <strong>AB/DE</strong>, <strong>BC/EF</strong>, and <strong>CA/FD</strong> will ALL be equal<br>• This common ratio is the <strong>scale factor</strong><br>• If the ratios are different, the triangles are NOT similar — even if some angles happen to be close!</div>
-      <div class="step-highlight">📏 Key insight: You CANNOT have similar triangles with matching angles but different side ratios. They always go together — that is what makes similarity such a powerful geometric relationship!</div>
+      <div class="step-body">When triangles are truly similar, look at the <strong>Side Ratios panel</strong>:<br><br>• <strong>AB/DE</strong>, <strong>BC/EF</strong>, and <strong>CA/FD</strong> will ALL be equal<br>• This common ratio is the <strong>scale factor</strong><br>• If ANY ratio differs, the triangles are NOT similar</div>
+      <div class="step-highlight">📏 Key insight: Matching angles and proportional sides always occur TOGETHER in similar triangles. You cannot have one without the other — that is what makes similarity such a powerful relationship!</div>
     </div>
     <div class="lesson-step" id="ls6">
       <div class="step-indicator">Step 6 of 7</div>
       <div class="step-title">Similarity Transformations</div>
-      <div class="step-body">Similarity is <strong>preserved</strong> through these transformations:<br><br>• <strong>Dilation</strong> — resizing changes size but NOT shape<br>• <strong>Rotation</strong> — spinning the triangle any number of degrees<br>• <strong>Reflection</strong> — flipping horizontally or vertically<br><br>No matter how you transform Triangle 2, if it was similar before, it stays similar after!</div>
-      <div class="step-highlight">🔄 Try the Transformations panel! First make the triangles similar by dragging. Then rotate and dilate Triangle 2. The similarity status stays ✅ Similar throughout all transformations!</div>
+      <div class="step-body">Similarity is <strong>preserved</strong> through these transformations:<br><br>• <strong>Dilation</strong> — resizing changes size but NOT shape<br>• <strong>Rotation</strong> — spinning any number of degrees<br>• <strong>Reflection</strong> — flipping horizontally or vertically<br><br>No matter how you transform Triangle 2, similarity is maintained!</div>
+      <div class="step-highlight">🔄 Try it: First make the triangles similar by dragging vertices. Then use the Transformations panel to rotate, dilate, and reflect Triangle 2. The ✅ Similar status remains throughout all transformations!</div>
     </div>
     <div class="lesson-step" id="ls7">
       <div class="step-indicator">Step 7 of 7</div>
       <div class="step-title">SSS and SAS Similarity</div>
-      <div class="step-body">Two more ways to prove similarity:<br><br>• <strong>SSS Similarity:</strong> All three pairs of corresponding sides are proportional (equal ratios)<br><br>• <strong>SAS Similarity:</strong> Two pairs of corresponding sides are proportional AND the angle between those sides (the included angle) is congruent</div>
-      <div class="step-highlight">🏆 You now know all three similarity postulates: <strong>AA, SSS, and SAS</strong>. The postulate badge updates automatically to show which one applies. Notice that when AA is satisfied, SSS is always satisfied too — they are two ways of describing the same relationship!</div>
+      <div class="step-body">Two more ways to prove similarity:<br><br>• <strong>SSS Similarity:</strong> All three pairs of corresponding sides are proportional<br><br>• <strong>SAS Similarity:</strong> Two pairs of corresponding sides are proportional AND the included angle between those sides is congruent</div>
+      <div class="step-highlight">🏆 You now know all three similarity postulates: <strong>AA, SSS, and SAS</strong>. The postulate badge updates automatically. Notice that when AA is satisfied, SSS is always satisfied too — they are two descriptions of the same geometric truth!</div>
     </div>
     <div class="modal-nav">
       <button class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)">← Prev</button>
@@ -380,9 +380,9 @@ const TOTAL_STEPS = 7;
 let reflectH = false, reflectV = false;
 let rotationDeg = 0, dilationFactor = 1.0;
 
-// Strict tolerances
-const ANGLE_TOL = 2;   // degrees — must be within 2° to count as matching
-const RATIO_TOL = 0.03; // 3% — all three ratios must be within 3% of each other
+// Strict tolerances — mathematically rigorous
+const ANGLE_TOL = 2;    // degrees
+const RATIO_TOL = 0.03; // 3% proportionality tolerance
 
 // Triangle 1 state
 let t1 = {
@@ -390,48 +390,51 @@ let t1 = {
   aA:50, aB:70, aC:60
 };
 
-// Triangle 2 — base positions (before transforms)
+// Triangle 2 base positions (before transforms)
 let t2base = { A:{x:420,y:450}, B:{x:660,y:450}, C:{x:530,y:200} };
-// Triangle 2 — actual drawn positions (after transforms)
+// Triangle 2 actual drawn positions
 let t2 = { A:{x:420,y:450}, B:{x:660,y:450}, C:{x:530,y:200} };
 
 // ==============================
 // MATH HELPERS
 // ==============================
 function dist(p, q) {
-  return Math.sqrt((q.x-p.x)**2 + (q.y-p.y)**2);
+  return Math.sqrt((q.x - p.x) ** 2 + (q.y - p.y) ** 2);
 }
 
-// Returns angle AT vertex, between rays toward p1 and p2, in degrees
 function angleDeg(p1, vertex, p2) {
   const v1 = { x: p1.x - vertex.x, y: p1.y - vertex.y };
   const v2 = { x: p2.x - vertex.x, y: p2.y - vertex.y };
-  const dot = v1.x*v2.x + v1.y*v2.y;
-  const mag = Math.sqrt(v1.x**2 + v1.y**2) * Math.sqrt(v2.x**2 + v2.y**2);
+  const dot = v1.x * v2.x + v1.y * v2.y;
+  const mag = Math.sqrt(v1.x ** 2 + v1.y ** 2) * Math.sqrt(v2.x ** 2 + v2.y ** 2);
   if (mag < 0.001) return 0;
-  return Math.acos(Math.max(-1, Math.min(1, dot/mag))) * 180 / Math.PI;
+  return Math.acos(Math.max(-1, Math.min(1, dot / mag))) * 180 / Math.PI;
 }
 
 function centroid(t) {
-  return { x:(t.A.x+t.B.x+t.C.x)/3, y:(t.A.y+t.B.y+t.C.y)/3 };
+  return { x: (t.A.x + t.B.x + t.C.x) / 3, y: (t.A.y + t.B.y + t.C.y) / 3 };
 }
 
 function rotatePoint(p, cx, cy, deg) {
   const r = deg * Math.PI / 180;
   const dx = p.x - cx, dy = p.y - cy;
   return {
-    x: cx + dx*Math.cos(r) - dy*Math.sin(r),
-    y: cy + dx*Math.sin(r) + dy*Math.cos(r)
+    x: cx + dx * Math.cos(r) - dy * Math.sin(r),
+    y: cy + dx * Math.sin(r) + dy * Math.cos(r)
+  };
+}
+
+function getMouse(e) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    mx: (e.clientX - rect.left) * (canvas.width / rect.width),
+    my: (e.clientY - rect.top) * (canvas.height / rect.height)
   };
 }
 
 // ==============================
-// GET PRECISE ANGLES (not rounded)
+// GET ANGLES
 // ==============================
-function getT1Angles() {
-  return { A: t1.aA, B: t1.aB, C: t1.aC };
-}
-
 function getT2Angles() {
   return {
     A: angleDeg(t2.B, t2.A, t2.C),
@@ -444,8 +447,7 @@ function getT2Angles() {
 // RIGOROUS SIMILARITY CHECK
 // ==============================
 function checkSimilarity() {
-  const a1 = getT1Angles(); // {A, B, C} exact from inputs
-  const a2 = getT2Angles(); // {A, B, C} computed from canvas positions
+  const a2 = getT2Angles();
 
   // Side lengths
   const AB1 = dist(t1.A, t1.B);
@@ -455,107 +457,69 @@ function checkSimilarity() {
   const EF2 = dist(t2.B, t2.C);
   const FD2 = dist(t2.C, t2.A);
 
-  // Corresponding side ratios
   const rAB = DE2 / AB1;
   const rBC = EF2 / BC1;
   const rCA = FD2 / CA1;
-
-  // ---- ANGLE MATCHING (strict, corresponding pairs) ----
-  // We check ALL 6 possible correspondences of T2 angles to T1 angles
-  // to find the best matching assignment
-  const t2angles = [a2.A, a2.B, a2.C];
-  const t1angles = [a1.A, a1.B, a1.C];
-
-  // Try all 6 permutations of T2 angle assignments
-  const perms = [
-    [0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]
-  ];
-
-  let bestPerm = null;
-  let bestMatchCount = 0;
-
-  for (const perm of perms) {
-    let matches = 0;
-    for (let i = 0; i < 3; i++) {
-      if (Math.abs(t1angles[i] - t2angles[perm[i]]) <= ANGLE_TOL) matches++;
-    }
-    if (matches > bestMatchCount) {
-      bestMatchCount = matches;
-      bestPerm = perm;
-    }
-  }
-
-  // With best permutation, check individual angle matches
-  const matchA = bestPerm ? Math.abs(t1angles[0] - t2angles[bestPerm[0]]) <= ANGLE_TOL : false;
-  const matchB = bestPerm ? Math.abs(t1angles[1] - t2angles[bestPerm[1]]) <= ANGLE_TOL : false;
-  const matchC = bestPerm ? Math.abs(t1angles[2] - t2angles[bestPerm[2]]) <= ANGLE_TOL : false;
-
-  // ---- SIDE RATIO CHECK (all three must be proportional) ----
   const avgRatio = (rAB + rBC + rCA) / 3;
-  const sidesProp = (
+
+  // Check all side ratios are proportional (within RATIO_TOL of each other)
+  const sidesProp = avgRatio > 0 &&
     Math.abs(rAB - avgRatio) / avgRatio <= RATIO_TOL &&
     Math.abs(rBC - avgRatio) / avgRatio <= RATIO_TOL &&
-    Math.abs(rCA - avgRatio) / avgRatio <= RATIO_TOL
-  );
+    Math.abs(rCA - avgRatio) / avgRatio <= RATIO_TOL;
 
-  // ---- DETERMINE SIMILARITY ----
-  // AA: at least 2 angle pairs match (3rd automatically follows from 180° sum)
-  const aaMatch = bestMatchCount >= 2;
+  // Try all 6 permutations of T2 angles vs T1 angles to find best match
+  const t1arr = [t1.aA, t1.aB, t1.aC];
+  const t2arr = [a2.A, a2.B, a2.C];
+  const perms = [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
+
+  let bestCount = 0;
+  let bestPerm = [0,1,2];
+  for (const p of perms) {
+    let count = 0;
+    for (let i = 0; i < 3; i++) {
+      if (Math.abs(t1arr[i] - t2arr[p[i]]) <= ANGLE_TOL) count++;
+    }
+    if (count > bestCount) { bestCount = count; bestPerm = p; }
+  }
+
+  // Individual angle match results using best permutation
+  const matchA = Math.abs(t1arr[0] - t2arr[bestPerm[0]]) <= ANGLE_TOL;
+  const matchB = Math.abs(t1arr[1] - t2arr[bestPerm[1]]) <= ANGLE_TOL;
+  const matchC = Math.abs(t1arr[2] - t2arr[bestPerm[2]]) <= ANGLE_TOL;
+
+  // AA: at least 2 angle pairs match AND sides must also be proportional
+  const aaOK = bestCount >= 2 && sidesProp;
   // SSS: all side ratios proportional
-  const sssMatch = sidesProp;
-  // SAS: two side ratios match AND included angle matches
-  const sasMatch = (
+  const sssOK = sidesProp && bestCount < 2;
+  // SAS: 2 sides proportional + included angle
+  const sasOK = !aaOK && !sssOK && (
     (Math.abs(rAB - rBC) / avgRatio <= RATIO_TOL && matchB) ||
     (Math.abs(rBC - rCA) / avgRatio <= RATIO_TOL && matchC) ||
     (Math.abs(rCA - rAB) / avgRatio <= RATIO_TOL && matchA)
   );
 
-  let similar = false;
-  let postulate = '';
+  let similar = aaOK || sssOK || sasOK;
+  let postulate = aaOK ? 'AA Similarity' : sssOK ? 'SSS Similarity' : sasOK ? 'SAS Similarity' : '';
 
-  if (aaMatch && sssMatch) {
-    similar = true;
-    postulate = 'AA Similarity';
-  } else if (sssMatch) {
-    similar = true;
-    postulate = 'SSS Similarity';
-  } else if (sasMatch) {
-    similar = true;
-    postulate = 'SAS Similarity';
-  }
-
-  return {
-    similar, postulate,
-    a2, matchA, matchB, matchC,
-    rAB, rBC, rCA, avgRatio, sidesProp,
-    bestMatchCount
-  };
+  return { similar, postulate, a2, matchA, matchB, matchC, rAB, rBC, rCA, avgRatio, sidesProp };
 }
 
 // ==============================
 // UPDATE PANEL
 // ==============================
 function updatePanel() {
-  const {
-    similar, postulate,
-    a2, matchA, matchB, matchC,
-    rAB, rBC, rCA, avgRatio, sidesProp
-  } = checkSimilarity();
+  const { similar, postulate, a2, matchA, matchB, matchC, rAB, rBC, rCA, avgRatio, sidesProp } = checkSimilarity();
 
-  // Status box
   const statusEl = document.getElementById('simStatus');
   statusEl.className = 'similarity-status ' + (similar ? 'status-similar' : 'status-not-similar');
   document.getElementById('simIcon').textContent = similar ? '✅' : '❌';
   document.getElementById('simText').textContent = similar ? 'SIMILAR' : 'NOT SIMILAR';
   const badge = document.getElementById('simPostulate');
-  if (similar && postulate) {
-    badge.textContent = postulate;
-    badge.style.display = 'inline-block';
-  } else {
-    badge.style.display = 'none';
-  }
+  badge.textContent = postulate;
+  badge.style.display = postulate ? 'inline-block' : 'none';
 
-  // Angle table — show precise values
+  // Angle table
   document.getElementById('d2A').textContent = a2.A.toFixed(1) + '°';
   document.getElementById('d2B').textContent = a2.B.toFixed(1) + '°';
   document.getElementById('d2C').textContent = a2.C.toFixed(1) + '°';
@@ -563,28 +527,26 @@ function updatePanel() {
   document.getElementById('mB').textContent = matchB ? '✅' : '❌';
   document.getElementById('mC').textContent = matchC ? '✅' : '❌';
 
-  // Side ratios — color code if equal
-  const rABel = document.getElementById('rAB');
-  const rBCel = document.getElementById('rBC');
-  const rCAel = document.getElementById('rCA');
-  rABel.textContent = rAB.toFixed(3);
-  rBCel.textContent = rBC.toFixed(3);
-  rCAel.textContent = rCA.toFixed(3);
-  rABel.style.color = sidesProp ? '#2ab878' : '#e8ecf1';
-  rBCel.style.color = sidesProp ? '#2ab878' : '#e8ecf1';
-  rCAel.style.color = sidesProp ? '#2ab878' : '#e8ecf1';
+  // Side ratios — green when proportional
+  const els = ['rAB','rBC','rCA'];
+  const vals = [rAB, rBC, rCA];
+  els.forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.textContent = vals[i].toFixed(3);
+    el.style.color = sidesProp ? '#2ab878' : '#e8ecf1';
+  });
 
-  document.getElementById('rScale').textContent = sidesProp ? avgRatio.toFixed(3) + '×' : 'Not proportional';
-  document.getElementById('rScale').style.color = sidesProp ? '#4a9eda' : '#e05a5a';
+  const scaleEl = document.getElementById('rScale');
+  scaleEl.textContent = sidesProp ? avgRatio.toFixed(3) + '×' : 'Not proportional';
+  scaleEl.style.color = sidesProp ? '#4a9eda' : '#e05a5a';
 
-  // Helpful note
   const note = document.getElementById('ratioNote');
   if (sidesProp) {
     note.textContent = '✅ All ratios equal — sides are proportional';
     note.style.color = '#2ab878';
   } else {
-    const spread = (Math.max(rAB,rBC,rCA) - Math.min(rAB,rBC,rCA)).toFixed(3);
-    note.textContent = 'Ratio spread: ' + spread + ' (need < 0.030)';
+    const spread = (Math.max(rAB, rBC, rCA) - Math.min(rAB, rBC, rCA)).toFixed(3);
+    note.textContent = 'Ratio spread: ' + spread + ' (need < 0.030 for proportional)';
     note.style.color = '#e05a5a';
   }
 }
@@ -603,19 +565,14 @@ function updateTriangle1() {
 
   const scale = parseFloat(document.getElementById('t1Scale').value) || 150;
   const aARad = aA * Math.PI / 180;
+  const aBRad = aB * Math.PI / 180;
   const aCRad = aC * Math.PI / 180;
-  const sinA = Math.sin(aARad);
-  const sinC = Math.sin(aCRad);
-  const sinB = Math.sin(aB * Math.PI / 180);
+  const sideC = scale;
+  const sideB = sideC * Math.sin(aBRad) / Math.sin(aCRad);
 
-  // Place base along bottom
-  const bx = 80, by = 450;
-  const sideC = scale; // side opposite angle C = base
-  const sideB = sideC * sinB / sinC;
-
-  t1.A = { x: bx, y: by };
-  t1.B = { x: bx + sideC, y: by };
-  t1.C = { x: bx + sideB * Math.cos(aARad), y: by - sideB * Math.sin(aARad) };
+  t1.A = { x: 80, y: 450 };
+  t1.B = { x: 80 + sideC, y: 450 };
+  t1.C = { x: 80 + sideB * Math.cos(aARad), y: 450 - sideB * Math.sin(aARad) };
 
   document.getElementById('d1A').textContent = aA.toFixed(1) + '°';
   document.getElementById('d1B').textContent = aB.toFixed(1) + '°';
@@ -631,24 +588,19 @@ function updateTriangle1() {
 function redraw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawGrid();
-
-  const a1 = getT1Angles();
   const a2 = getT2Angles();
-
-  drawTriangle(t1, '#4a9eda', false,
-    a1.A.toFixed(1), a1.B.toFixed(1), a1.C.toFixed(1), 'A','B','C');
-  drawTriangle(t2, '#e07aaa', true,
-    a2.A.toFixed(1), a2.B.toFixed(1), a2.C.toFixed(1), 'D','E','F');
+  drawTriangle(t1, '#4a9eda', false, t1.aA.toFixed(1), t1.aB.toFixed(1), t1.aC.toFixed(1), 'A', 'B', 'C');
+  drawTriangle(t2, '#e07aaa', true, a2.A.toFixed(1), a2.B.toFixed(1), a2.C.toFixed(1), 'D', 'E', 'F');
 }
 
 function drawGrid() {
   ctx.strokeStyle = 'rgba(74,158,218,0.05)';
   ctx.lineWidth = 1;
   for (let x = 0; x < canvas.width; x += 40) {
-    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
   }
   for (let y = 0; y < canvas.height; y += 40) {
-    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
   }
 }
 
@@ -664,25 +616,22 @@ function drawTriangle(t, color, draggable, aA, aB, aC, lA, lB, lC) {
   ctx.lineWidth = 2.5;
   ctx.stroke();
 
-  // Angle arcs — color coded for correspondence
   drawArc(t.B, t.A, t.C, '#f4a44a', aA + '°');
   drawArc(t.A, t.B, t.C, '#2ab878', aB + '°');
   drawArc(t.A, t.C, t.B, '#c75a8a', aC + '°');
 
-  // Side length labels
   labelSide(t.A, t.B, color);
   labelSide(t.B, t.C, color);
   labelSide(t.C, t.A, color);
 
-  // Vertex dots and labels
   labelVertex(t.A, color, lA, draggable);
   labelVertex(t.B, color, lB, draggable);
   labelVertex(t.C, color, lC, draggable);
 }
 
 function drawArc(p1, vertex, p2, color, label) {
-  const v1 = { x: p1.x-vertex.x, y: p1.y-vertex.y };
-  const v2 = { x: p2.x-vertex.x, y: p2.y-vertex.y };
+  const v1 = { x: p1.x - vertex.x, y: p1.y - vertex.y };
+  const v2 = { x: p2.x - vertex.x, y: p2.y - vertex.y };
   const a1 = Math.atan2(v1.y, v1.x);
   const a2 = Math.atan2(v2.y, v2.x);
   ctx.beginPath();
@@ -691,31 +640,30 @@ function drawArc(p1, vertex, p2, color, label) {
   ctx.lineWidth = 2;
   ctx.stroke();
   const mid = (a1 + a2) / 2;
-  const lx = vertex.x + 34 * Math.cos(mid);
-  const ly = vertex.y + 34 * Math.sin(mid);
   ctx.fillStyle = color;
   ctx.font = 'bold 10px Jost,sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(label, lx, ly);
+  ctx.fillText(label, vertex.x + 34 * Math.cos(mid), vertex.y + 34 * Math.sin(mid));
 }
 
 function labelSide(p1, p2, color) {
-  const mx = (p1.x+p2.x)/2, my = (p1.y+p2.y)/2;
-  const d = dist(p1,p2).toFixed(1);
-  const angle = Math.atan2(p2.y-p1.y, p2.x-p1.x);
-  const ox = -Math.sin(angle)*10, oy = Math.cos(angle)*10;
-  ctx.fillStyle = color + 'cc';
+  const mx = (p1.x + p2.x) / 2;
+  const my = (p1.y + p2.y) / 2;
+  const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+  const ox = -Math.sin(angle) * 10;
+  const oy = Math.cos(angle) * 10;
+  ctx.fillStyle = color + 'bb';
   ctx.font = '500 10px Jost,sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(d, mx+ox, my+oy);
+  ctx.fillText(dist(p1, p2).toFixed(1), mx + ox, my + oy);
 }
 
 function labelVertex(p, color, label, draggable) {
   const r = draggable ? 9 : 5;
   ctx.beginPath();
-  ctx.arc(p.x, p.y, r, 0, Math.PI*2);
+  ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
   ctx.fillStyle = color;
   ctx.fill();
   if (draggable) { ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke(); }
@@ -730,34 +678,81 @@ function labelVertex(p, color, label, draggable) {
 // DRAG
 // ==============================
 canvas.addEventListener('mousedown', e => {
-  const {mx, my} = getMouse(e);
-  for (const key of ['A','B','C']) {
-    if (dist({x:mx,y:my}, t2[key]) < 18) { dragging = key; break; }
+  const { mx, my } = getMouse(e);
+  for (const key of ['A', 'B', 'C']) {
+    if (dist({ x: mx, y: my }, t2[key]) < 18) { dragging = key; break; }
   }
 });
 
 canvas.addEventListener('mousemove', e => {
-  const {mx, my} = getMouse(e);
+  const { mx, my } = getMouse(e);
   if (dragging) {
-    t2[dragging] = {x:mx, y:my};
-    t2base[dragging] = {x:mx, y:my};
+    t2[dragging] = { x: mx, y: my };
+    t2base[dragging] = { x: mx, y: my };
     redraw();
     updatePanel();
   }
-  if (mode === 'drag') {
-    let hover = false;
-    for (const key of ['A','B','C']) {
-      if (dist({x:mx,y:my}, t2[key]) < 18) { hover = true; break; }
-    }
-    canvas.style.cursor = hover ? 'grab' : 'crosshair';
+  let hover = false;
+  for (const key of ['A', 'B', 'C']) {
+    if (dist({ x: mx, y: my }, t2[key]) < 18) { hover = true; break; }
   }
+  canvas.style.cursor = hover ? 'grab' : 'crosshair';
 });
 
 canvas.addEventListener('mouseup', () => { dragging = null; });
 canvas.addEventListener('mouseleave', () => { dragging = null; });
 
-function getMouse(e) {
-  const rect = canvas.getBoundingClientRect();
-  return {
-    mx: (e.clientX - rect.left) * (canvas.width / rect.width),
-    my:
+// ==============================
+// MODE
+// ==============================
+function setMode(m) {
+  mode = m;
+  document.getElementById('btnDrag').classList.toggle('active', m === 'drag');
+}
+
+// ==============================
+// TRANSFORMATIONS
+// ==============================
+function applyTransforms() {
+  const c = centroid(t2base);
+  for (const key of ['A', 'B', 'C']) {
+    let p = { ...t2base[key] };
+    p = { x: c.x + (p.x - c.x) * dilationFactor, y: c.y + (p.y - c.y) * dilationFactor };
+    if (reflectH) p = { x: 2 * c.x - p.x, y: p.y };
+    if (reflectV) p = { x: p.x, y: 2 * c.y - p.y };
+    p = rotatePoint(p, c.x, c.y, rotationDeg);
+    t2[key] = p;
+  }
+  redraw();
+  updatePanel();
+}
+
+function toggleReflectH() {
+  reflectH = !reflectH;
+  document.getElementById('btnRH').classList.toggle('active', reflectH);
+  applyTransforms();
+}
+
+function toggleReflectV() {
+  reflectV = !reflectV;
+  document.getElementById('btnRV').classList.toggle('active', reflectV);
+  applyTransforms();
+}
+
+function setRotation(v) {
+  rotationDeg = parseFloat(v);
+  document.getElementById('rotVal').textContent = v + '°';
+  applyTransforms();
+}
+
+function setDilation(v) {
+  dilationFactor = parseFloat(v) / 100;
+  document.getElementById('dilVal').textContent = dilationFactor.toFixed(2) + '×';
+  applyTransforms();
+}
+
+// ==============================
+// RESET
+// ==============================
+function resetAll() {
+  t2base = { A:{x:420,y:450
